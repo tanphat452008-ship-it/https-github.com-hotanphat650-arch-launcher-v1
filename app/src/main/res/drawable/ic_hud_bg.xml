@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<vector android:height="235.0dip" android:width="215.0dip" android:viewportWidth="215.0" android:viewportHeight="235.0"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
-    <path android:fillColor="#ffffffff" android:pathData="M108,24.671L108,24.671A83,83 0,0 1,191 107.671L191,107.671A83,83 0,0 1,108 190.671L108,190.671A83,83 0,0 1,25 107.671L25,107.671A83,83 0,0 1,108 24.671z" android:fillAlpha="0.1" />
-    <path android:fillColor="@drawable/ic_hud_bg__0" android:pathData="M108,24.671L108,24.671A83,83 0,0 1,191 107.671L191,107.671A83,83 0,0 1,108 190.671L108,190.671A83,83 0,0 1,25 107.671L25,107.671A83,83 0,0 1,108 24.671z" android:fillAlpha="0.75" />
-    <path android:fillColor="#00000000" android:pathData="M108,23.171L108,23.171A84.5,84.5 0,0 1,192.5 107.671L192.5,107.671A84.5,84.5 0,0 1,108 192.171L108,192.171A84.5,84.5 0,0 1,23.5 107.671L23.5,107.671A84.5,84.5 0,0 1,108 23.171z" android:strokeColor="@drawable/ic_hud_bg__1" android:strokeWidth="3.0" android:strokeAlpha="0.4" />
-    <path android:fillColor="@drawable/ic_hud_bg__2" android:pathData="M116.579,8.363L107.5,0.5L98.304,8.464C50.845,13.03 13.079,50.77 8.472,98.217L0,108L8.472,117.783C13.079,165.23 50.845,202.97 98.304,207.536L107.5,215.5L116.579,207.637C164.992,203.524 203.572,164.918 207.644,116.494L215,108L207.644,99.507C203.572,51.082 164.992,12.476 116.579,8.363ZM108,205C161.572,205 205,161.572 205,108C205,54.428 161.572,11 108,11C54.428,11 11,54.428 11,108C11,161.572 54.428,205 108,205Z" android:fillAlpha="0.25" android:fillType="evenOdd" />
-</vector>

@@ -17,40 +17,36 @@
     <item type="id" name="wifiSettingsButton" />
     <item type="id" name="imageView1" />
     <item type="id" name="progressBar1" />
-    <item name="speed_car_hp_line" type="id" />
-    <item name="speed_car_hp" type="id" />
-    <item name="speed_fuel_line" type="id" />
-    <item name="speed_fuel" type="id" />
-    <item name="speedometer" type="id" />
-    <item name="speed_line" type="id" />
-    <item name="speed_arrow" type="id" />
-    <item name="speed_bg" type="id" />
-    <item name="speed_belt_ico" type="id" />
-    <item name="speed_lock_ico" type="id" />
-    <item name="speed_light_ico" type="id" />
-    <item name="speed_engine_ico" type="id" />
-    <item name="speed_status_bar" type="id" />
-    <item name="speed_mileage_text" type="id" />
     <item name="speed_text" type="id" />
+    <item name="speedometer" type="id" />
+    <item name="constraintLayout" type="id" />
+    <item name="speed_line" type="id" />
+    <item name="speedo_center" type="id" />
+    <item name="imageView10" type="id" />
+    <item name="imageView8" type="id" />
+    <item name="blinker" type="id" />
+    <item name="textView2" type="id" />
+    <item name="linearLayout" type="id" />
+    <item name="speed_lock_ico" type="id" />
+    <item name="speed_engine_ico" type="id" />
+    <item name="imageView9" type="id" />
+    <item name="imageView11" type="id" />
     <item name="speed_fuel_text" type="id" />
+    <item name="imageView12" type="id" />
+    <item name="strela_pravo" type="id" />
+    <item name="strela_levo" type="id" />
+    <item name="imageView13" type="id" />
     <item name="speed_car_hp_text" type="id" />
-    <item name="hud_menuyzbek" type="id" />
-    <item name="btn_server_donate" type="id" />
-    <item name="linearLayoutTwo" type="id" />
-    <item name="btn_menu_zaloba" type="id" />
-    <item name="btn_menu_promo" type="id" />
-    <item name="btn_anim" type="id" />
-    <item name="btn_family" type="id" />
-    <item name="btn_menu_personal" type="id" />
-    <item name="linearLayoutOne" type="id" />
-    <item name="btn_menu_cars" type="id" />
-    <item name="btn_menu_gps" type="id" />
-    <item name="btn_menu_inv" type="id" />
-    <item name="btn_menu_donate" type="id" />
-    <item name="menu_xtr" type="id" />
-    <item name="btn_menu_settings" type="id" />
-    <item name="menu_clossed" type="id" />
-    <item name="constraintlayoutMenu1" type="id" />
-    <item name="constraintlayoutMenu" type="id" />
-    <item name="textView6" type="id" />
+    <item name="textView" type="id" />
+    <item name="password_text" type="id" />
+    <item name="auto_switch" type="id" />
+    <item name="hint_text_main_title" type="id" />
+    <item name="hint_main_quests" type="id" />
+    <item name="hint_underline" type="id" />
+    <item name="hint_text_additional_title" type="id" />
+    <item name="hint_instructor" type="id" />
+    <item name="hint_text_instructor" type="id" />
+    <item name="hint_additional_quests" type="id" />
+    <item name="hint_additional_quests_block_view" type="id" />
+    <item name="hint_text_if_without_additional_quests" type="id" />
 </resources>

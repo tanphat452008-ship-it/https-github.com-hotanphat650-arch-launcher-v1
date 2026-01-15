@@ -75,11 +75,31 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        <View android:id="@+id/dark_screen" android:background="#ff000000" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" />
-        <include layout="@layout/bhud_layout" />
+
+        <View
+            android:id="@+id/dark_screen"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:alpha="0.0"
+            android:background="#ff000000"
+            android:visibility="visible" />
+
         <include layout="@layout/bspeed_layout"/>
-        <include layout="@layout/sd_dialog" />
-        <include layout="@layout/hassle_tab" />
-        <include android:visibility="invisible" layout="@layout/futile_menu" />
+        <include layout="@layout/bhud_layout" />
+        <include layout="@layout/menu_action_dialog" />
+        <include layout="@layout/radial_menu" />
+        <include layout="@layout/donate_reytiz" />
+        <include layout="@layout/inventory_reytiz"/>
+        <include layout="@layout/donat_sc" />
+        <include layout="@layout/donate_podt" />
+        <include layout="@layout/window_dialog" />
+        <include layout="@layout/reg_create" />
+        <include layout="@layout/reg_create_sx" />
+        <include layout="@layout/reg_login" />
+        <include layout="@layout/fragmentpause"/>
+        <include layout="@layout/br_serverselect" />
+
+
+
     </FrameLayout>
 </FrameLayout>

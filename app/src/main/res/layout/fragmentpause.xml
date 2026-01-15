@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PausMenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="1140dp"
+        android:layout_height="817dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/background_menu"
+        tools:layout_editor_absoluteX="-97dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_clean_game2"
+        android:layout_width="158dp"
+        android:layout_height="49dp"
+        android:layout_margin="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/launcher_main_button_blue_bg"
+        android:drawableStart="@drawable/launcher_main_settings_gear_ic"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center"
+        android:padding="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Настройки"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button3"
+        android:layout_width="158dp"
+        android:layout_height="49dp"
+        android:background="@drawable/launcher_main_button_blue_bg"
+        android:drawableStart="@android:drawable/ic_dialog_map"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center"
+        android:padding="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Карта"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_clean_game2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_playgo2"
+        android:layout_width="219dp"
+        android:layout_height="59dp"
+        android:layout_margin="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/launcher_red_buttons_bg"
+        android:drawableStart="@drawable/launcher_main_play_ic"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:padding="13dp"
+        android:paddingStart="28dp"
+        android:paddingEnd="36dp"
+        android:text="ВЕРНУТЬСЯ В ИГРУ"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView31"
+        android:layout_width="297dp"
+        android:layout_height="298dp"
+        android:layout_marginBottom="188dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bg0_g" />
+
+    <TextView
+        android:id="@+id/textNick"
+        android:layout_width="177dp"
+        android:layout_height="27dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Your_Name [0]"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <TextView
+        android:id="@+id/textServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="-- Test server"
+
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textNick"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textPausa"
+        android:layout_width="151dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="329dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="269dp"
+        android:layout_marginBottom="170dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_26sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="вы на паузе"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.562" />
+
+    <TextView
+        android:id="@+id/Avtor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/akrobat_bold"
+        android:text=""
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.661" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

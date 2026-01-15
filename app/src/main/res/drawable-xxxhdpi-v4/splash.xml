@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:drawable="@drawable/back_splash" />
-	<item android:gravity="center" android:height="@dimen/_250sdp" android:width="@dimen/_250sdp" android:drawable="@drawable/back2" />
-</layer-list>

@@ -7,7 +7,6 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorAccent">#ff0000ee</item>
     </style>
-
     <style name="Theme.IAPTheme" parent="@android:style/Theme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
@@ -15,6 +14,11 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="MontserratBold12sp" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">@dimen/_10ssp</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
     <style name="WalletFragmentDefaultDetailsTextAppearance">
         <item name="android:textSize">14.0sp</item>
@@ -55,10 +59,62 @@
     </style>
 
     <style name="AppBaseTheme" parent="@android:style/Theme.Light" />
-    <style name="AppTheme" parent="@style/AppBaseTheme" />
 
     <style name="round_progressbar" parent="android:Widget.Holo.ProgressBar">
     <item name="android:layout_width">100dp</item>
     <item name="android:layout_marginLeft">8dp</item>
 </style>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+</style>
+
+    <style name="AppTheme.NoActionBar">
+    <item name="android:windowBackground">@drawable/back</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowTitleSize">0dp</item>
+    </style>
+    <style name="PopupWindowAnimationNotification">
+        <item name="android:windowEnterAnimation">@anim/popup_show_notification</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide_notification</item>
+    </style>
+
+    <style name="AppTheme.WithSplash">
+    <item name="android:windowBackground">@drawable/splash</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowTitleSize">0dp</item>
+    </style>
+
+    <style name="MontserratBold14sp" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="MontserratBold11sdpOr14sp">
+        <item name="android:textSize">@dimen/_11ssp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="MontserratBold8sp" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="MontserratRegular14sp"><item name="android:textSize">14.0sp</item><item name="android:textColor">@android:color/white</item><item name="android:fontFamily">@font/montserrat_regular</item></style>
+
+    <style name="MontserratRegular12sp"><item name="android:textSize">12.0sp</item><item name="android:textColor">@android:color/white</item><item name="android:fontFamily">@font/montserrat_regular</item></style>
+    <dimen name="_10ssp" />
+    <dimen name="_11ssp" />
+    <dimen name="_8ssp" />
 </resources>
+
