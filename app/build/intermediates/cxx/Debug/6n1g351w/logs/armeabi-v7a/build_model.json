@@ -1,0 +1,166 @@
+{
+  "abi": "ARMEABI_V7A",
+  "info": {
+    "abi": "ARMEABI_V7A",
+    "bitness": 32,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\.cxx\\Debug\\6n1g351w\\armeabi-v7a",
+  "soFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w\\obj\\local\\armeabi-v7a",
+  "soRepublishFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\armeabi-v7a",
+  "abiPlatformVersion": 21,
+  "variant": {
+    "buildSystemArgumentList": [],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A"
+    ],
+    "buildTargetSet": [],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\.cxx",
+      "intermediatesBaseFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates",
+      "intermediatesFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\LauncherPro\\SARPCityMB\\app",
+      "moduleBuildFile": "D:\\LauncherPro\\SARPCityMB\\app\\build.gradle",
+      "makeFile": "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+      "buildSystem": "NDK_BUILD",
+      "ndkFolder": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499",
+      "ndkVersion": "16.1.4479499",
+      "ndkSupportedAbiList": [
+        "ARMEABI",
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "MIPS",
+        "MIPS64",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "SYSTEM",
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI",
+          "bitness": 32,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "MIPS",
+          "bitness": 32,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "MIPS64",
+          "bitness": 64,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake",
+      "stlSharedObjectMap": {
+        "GNUSTL_SHARED": {
+          "ARMEABI": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi\\libgnustl_shared.so",
+          "ARMEABI_V7A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\libgnustl_shared.so",
+          "ARM64_V8A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\arm64-v8a\\libgnustl_shared.so",
+          "MIPS": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\mips\\libgnustl_shared.so",
+          "MIPS64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\mips64\\libgnustl_shared.so",
+          "X86": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86\\libgnustl_shared.so",
+          "X86_64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86_64\\libgnustl_shared.so"
+        },
+        "GNUSTL_STATIC": {},
+        "LIBCXX_SHARED": {
+          "ARMEABI": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\armeabi\\libc++_shared.so",
+          "ARMEABI_V7A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\armeabi-v7a\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\arm64-v8a\\libc++_shared.so",
+          "MIPS": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\mips\\libc++_shared.so",
+          "MIPS64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\mips64\\libc++_shared.so",
+          "X86": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\x86\\libc++_shared.so",
+          "X86_64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\x86_64\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "STLPORT_SHARED": {
+          "ARMEABI": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\armeabi\\libstlport_shared.so",
+          "ARMEABI_V7A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\armeabi-v7a\\libstlport_shared.so",
+          "ARM64_V8A": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\arm64-v8a\\libstlport_shared.so",
+          "MIPS": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\mips\\libstlport_shared.so",
+          "MIPS64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\mips64\\libstlport_shared.so",
+          "X86": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\x86\\libstlport_shared.so",
+          "X86_64": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\x86_64\\libstlport_shared.so"
+        },
+        "STLPORT_STATIC": {},
+        "SYSTEM": {},
+        "UNKNOWN": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "D:\\LauncherPro\\SARPCityMB",
+        "sdkFolder": "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false
+      },
+      "outputOptions": []
+    },
+    "prefabClassPaths": [],
+    "prefabPackages": [],
+    "prefabPackageConfigurations": [],
+    "stlType": "gnustl_static",
+    "optimizationTag": "Debug"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\.cxx\\Debug\\6n1g351w\\prefab\\armeabi-v7a",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "6n1g351wmap4u575w6s6x42206y604438w5631t4z52l2m32jq11656o",
+  "fullConfigurationHashKey": "# Values used to calculate the hash in this folder name.\n# Should not depend on the absolute path of the project itself.\n#   - AGP: 7.4.2.\n#   - $NDK is the path to NDK 16.1.4479499.\n#   - $PROJECT is the path to the parent folder of the root Gradle build file.\n#   - $ABI is the ABI to be built with. The specific value doesn\u0027t contribute to the value of the hash.\n#   - $HASH is the hash value computed from this text.\nNDK_PROJECT_PATH\u003dnull\nAPP_BUILD_SCRIPT\u003d$PROJECT/app/src/main/cpp/jni/Android.mk\nNDK_APPLICATION_MK\u003d$PROJECT/app/src/main/cpp/jni/Application.mk\nAPP_ABI\u003d$ABI\nNDK_ALL_ABIS\u003d$ABI\nNDK_DEBUG\u003d1\nAPP_PLATFORM\u003dandroid-21\nNDK_OUT\u003d$PROJECT/app/build/intermediates/cxx/Debug/$HASH/obj\nNDK_LIBS_OUT\u003d$PROJECT/app/build/intermediates/cxx/Debug/$HASH/lib",
+  "configurationArguments": [
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Application.mk",
+    "APP_ABI\u003darmeabi-v7a",
+    "NDK_ALL_ABIS\u003darmeabi-v7a",
+    "NDK_DEBUG\u003d1",
+    "APP_PLATFORM\u003dandroid-21",
+    "NDK_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/obj",
+    "NDK_LIBS_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/lib"
+  ],
+  "intermediatesParentFolder": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w"
+}

@@ -1,0 +1,67 @@
+{
+  "buildFiles": [
+    "C:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Android.mk",
+    "C:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Application.mk"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+      "NDK_PROJECT_PATH\u003dnull",
+      "APP_BUILD_SCRIPT\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Android.mk",
+      "NDK_APPLICATION_MK\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Application.mk",
+      "APP_ABI\u003darmeabi-v7a",
+      "NDK_ALL_ABIS\u003darmeabi-v7a",
+      "NDK_DEBUG\u003d1",
+      "APP_PLATFORM\u003dandroid-21",
+      "NDK_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/obj",
+      "NDK_LIBS_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/lib",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Application.mk",
+    "APP_ABI\u003darmeabi-v7a",
+    "NDK_ALL_ABIS\u003darmeabi-v7a",
+    "NDK_DEBUG\u003d1",
+    "APP_PLATFORM\u003dandroid-21",
+    "NDK_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/obj",
+    "NDK_LIBS_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/lib",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "sampvoice-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\taylyxsource\\app\\src\\main\\cpp\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/obj",
+        "NDK_LIBS_OUT\u003dC:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/lib",
+        "C:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54/obj/local/armeabi-v7a/libsampvoice.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "sampvoice",
+      "output": "C:\\taylyxsource\\app\\build\\intermediates\\cxx\\Debug\\2s3f1o54\\obj\\local\\armeabi-v7a\\libsampvoice.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-armeabi-v7a": {
+      "cCompilerExecutable": "C:\\Android\\Sdk\\ndk\\16.1.4479499\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Android\\Sdk\\ndk\\16.1.4479499\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

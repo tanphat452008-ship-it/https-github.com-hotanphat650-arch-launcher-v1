@@ -1,0 +1,14 @@
+Executable : C:\Android\Sdk\ndk\16.1.4479499\ndk-build.cmd
+arguments : 
+NDK_PROJECT_PATH=null
+APP_BUILD_SCRIPT=C:\taylyxsource\app\src\main\cpp\jni\Android.mk
+NDK_APPLICATION_MK=C:\taylyxsource\app\src\main\cpp\jni\Application.mk
+APP_ABI=armeabi-v7a
+NDK_ALL_ABIS=armeabi-v7a
+NDK_DEBUG=1
+APP_PLATFORM=android-21
+NDK_OUT=C:\taylyxsource\app\build\intermediates\cxx\Debug\2s3f1o54/obj
+NDK_LIBS_OUT=C:\taylyxsource\app\build\intermediates\cxx\Debug\2s3f1o54/lib
+sampvoice
+jvmArgs : 
+

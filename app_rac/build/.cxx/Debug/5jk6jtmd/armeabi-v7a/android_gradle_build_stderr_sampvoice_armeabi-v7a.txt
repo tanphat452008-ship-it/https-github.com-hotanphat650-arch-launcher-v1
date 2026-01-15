@@ -1,0 +1,6 @@
+D:/LauncherPro/SARPCityMB/app/src/main/cpp/jni/voice/CVoiceChatClient.cpp:69: error: undefined reference to 'pVoice'
+D:/LauncherPro/SARPCityMB/app/src/main/cpp/jni/voice/CVoiceChatClient.cpp:124: error: undefined reference to 'pVoice'
+D:/LauncherPro/SARPCityMB/app/src/main/cpp/jni/voice/CVoiceChatClient.cpp:124: error: undefined reference to 'pVoice'
+D:/LauncherPro/SARPCityMB/app/src/main/cpp/jni/voice/CVoiceChatClient.cpp:124: error: undefined reference to 'pVoice'
+clang++.exe: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [D:\LauncherPro\SARPCityMB\app\build\intermediates\cxx\Debug\5jk6jtmd/obj/local/armeabi-v7a/libsampvoice.so] Error 1

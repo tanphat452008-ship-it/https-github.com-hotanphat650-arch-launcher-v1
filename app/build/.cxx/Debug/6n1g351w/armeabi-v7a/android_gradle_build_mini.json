@@ -1,0 +1,55 @@
+{
+  "buildFiles": [
+    "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+    "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Application.mk"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+      "NDK_PROJECT_PATH\u003dnull",
+      "APP_BUILD_SCRIPT\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+      "NDK_APPLICATION_MK\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Application.mk",
+      "APP_ABI\u003darmeabi-v7a",
+      "NDK_ALL_ABIS\u003darmeabi-v7a",
+      "NDK_DEBUG\u003d1",
+      "APP_PLATFORM\u003dandroid-21",
+      "NDK_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/obj",
+      "NDK_LIBS_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/lib",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Application.mk",
+    "APP_ABI\u003darmeabi-v7a",
+    "NDK_ALL_ABIS\u003darmeabi-v7a",
+    "NDK_DEBUG\u003d1",
+    "APP_PLATFORM\u003dandroid-21",
+    "NDK_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/obj",
+    "NDK_LIBS_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/lib",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "sampvoice-debug-armeabi-v7a": {
+      "artifactName": "sampvoice",
+      "buildCommandComponents": [
+        "C:\\Users\\ADMIN\\AppData\\Local\\Android\\Sdk\\ndk\\16.1.4479499\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dD:\\LauncherPro\\SARPCityMB\\app\\src\\main\\cpp\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/obj",
+        "NDK_LIBS_OUT\u003dD:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/lib",
+        "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w/obj/local/armeabi-v7a/libsampvoice.so"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\cxx\\Debug\\6n1g351w\\obj\\local\\armeabi-v7a\\libsampvoice.so",
+      "runtimeFiles": []
+    }
+  }
+}

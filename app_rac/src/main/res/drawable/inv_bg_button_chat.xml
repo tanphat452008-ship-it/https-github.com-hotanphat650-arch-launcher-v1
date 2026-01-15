@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="3.0dip" />
+            <gradient android:startColor="@color/inv_chat_gradient_start" android:endColor="@color/inv_chat_gradient_end" android:angle="270.0" />
+        </shape>
+    </item>
+</selector>

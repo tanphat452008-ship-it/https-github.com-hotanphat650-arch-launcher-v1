@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="@dimen/_250sdp" android:layout_height="@dimen/_200sdp" android:layout_marginBottom="@dimen/_20sdp" app:cardBackgroundColor="#ff101a34" app:cardCornerRadius="@dimen/_8sdp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@+id/ivNewsImage" android:layout_width="fill_parent" android:layout_height="@dimen/_120sdp" android:src="@drawable/test_bg_news" android:scaleType="centerCrop" />
+    <TextView android:textSize="@dimen/_10sdp" android:textStyle="bold" android:textColor="@color/white" android:layout_gravity="center|top" android:id="@+id/tvNewsText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_130sdp" android:text="Открытое тестирование" android:textAllCaps="true" android:fontFamily="@font/proxima_nova_semibold" />
+    <Button android:textSize="@dimen/_11sdp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@+id/button" android:background="@drawable/btn" android:layout_width="@dimen/_170sdp" android:layout_height="@dimen/_35sdp" android:layout_marginTop="@dimen/_70sdp" android:text="Продолжить" android:textAllCaps="true" android:fontFamily="@font/proxima_nova_semibold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/textView3" />
+</androidx.cardview.widget.CardView>

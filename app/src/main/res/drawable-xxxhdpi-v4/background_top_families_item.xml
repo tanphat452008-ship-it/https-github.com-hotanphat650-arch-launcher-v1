@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt" android:height="34.0dip" android:width="458.0dip" android:viewportWidth="458.0" android:viewportHeight="34.0">
+	<group>
+		<clip-path android:pathData="M0 0H458V34H0V0Z" />
+		<group android:pivotX="229.0" android:pivotY="17.0" android:scaleX="2.236" android:scaleY="233.282" android:rotation="26.565" android:translateX="0.25" android:translateY="-57.82">
+			<path android:fillColor="@drawable/$background_top_families_item__0" android:pathData="M0 0V34H458V0" />
+		</group>
+	</group>
+</vector>

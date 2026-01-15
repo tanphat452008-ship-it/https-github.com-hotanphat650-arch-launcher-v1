@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/inventory_reytiz" android:background="#77000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@+id/line_items_inv" android:background="#ff212121" android:layout_width="57.0dip" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout android:orientation="horizontal" android:id="@+id/inv_line_menu" android:layout_width="55.0dip" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+            <ImageView android:id="@+id/inv_line_img_menu" android:layout_width="25.0dip" android:layout_height="25.0dip" android:src="@drawable/inv_icon_button_menu_res" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="7.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@+id/inv_line_text_menu" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Меню" android:layout_below="@id/inv_line_img_menu" android:layout_marginStart="3.0dip" android:layout_marginEnd="3.0dip" />
+            <View android:background="@drawable/inv_buttons_divider_gradient" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="6.0dip" android:layout_below="@+id/inv_line_text_menu" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+        </RelativeLayout>
+        <RelativeLayout android:orientation="horizontal" android:id="@+id/inv_line_stats" android:layout_width="55.0dip" android:layout_height="wrap_content" android:layout_marginTop="6.0dip">
+            <ImageView android:id="@+id/inv_line_img_stats" android:layout_width="25.0dip" android:layout_height="25.0dip" android:src="@drawable/inv_icon_button_state_res" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="7.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@+id/inv_line_text_stats" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Статистика" android:layout_below="@id/inv_line_img_stats" android:layout_marginStart="3.0dip" android:layout_marginEnd="3.0dip" />
+            <View android:background="@drawable/inv_buttons_divider_gradient" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="6.0dip" android:layout_below="@+id/inv_line_text_stats" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+        </RelativeLayout>
+        <RelativeLayout android:orientation="horizontal" android:id="@+id/inv_line_donate" android:layout_width="55.0dip" android:layout_height="wrap_content" android:layout_marginTop="6.0dip">
+            <ImageView android:id="@+id/inv_line_img_donate" android:layout_width="25.0dip" android:layout_height="25.0dip" android:src="@drawable/inv_icon_button_donate_res" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="7.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@+id/inv_line_text_donate" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Донат" android:layout_below="@id/inv_line_img_donate" android:layout_marginStart="3.0dip" android:layout_marginEnd="3.0dip" />
+            <View android:background="@drawable/inv_buttons_divider_gradient" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="6.0dip" android:layout_below="@+id/inv_line_text_donate" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+        </RelativeLayout>
+        <RelativeLayout android:orientation="horizontal" android:id="@+id/inv_line_menuactions" android:layout_width="55.0dip" android:layout_height="wrap_content" android:layout_marginTop="6.0dip">
+            <ImageView android:id="@+id/inv_line_img_menuactions" android:layout_width="25.0dip" android:layout_height="25.0dip" android:src="@drawable/inv_icon_button_radial_menu_res" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="7.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@+id/inv_line_text_menuactions" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Меню действий" android:layout_below="@id/inv_line_img_menuactions" android:layout_marginStart="3.0dip" android:layout_marginEnd="3.0dip" />
+            <View android:background="@drawable/inv_buttons_divider_gradient" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="6.0dip" android:layout_below="@+id/inv_line_text_menuactions" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+        </RelativeLayout>
+        <RelativeLayout android:orientation="horizontal" android:id="@+id/inv_line_pass" android:layout_width="55.0dip" android:layout_height="wrap_content" android:layout_marginTop="6.0dip">
+            <ImageView android:id="@+id/inv_line_img_pass" android:layout_width="25.0dip" android:layout_height="25.0dip" android:src="@drawable/inv_icon_button_black_pass_res" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="7.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@+id/inv_line_text_pass" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="BLACK PASS" android:layout_below="@id/inv_line_img_pass" android:layout_marginStart="3.0dip" android:layout_marginEnd="3.0dip" />
+            <View android:background="@drawable/inv_buttons_divider_gradient" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="6.0dip" android:layout_below="@+id/inv_line_text_pass" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+        </RelativeLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+        <ImageView android:layout_gravity="center" android:id="@+id/exit_button" android:layout_width="25.0dip" android:layout_height="25.0dip" android:layout_marginBottom="10.0dip" android:layout_marginStart="2.0dip" app:srcCompat="@drawable/inv_icon_button_exit_res" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@+id/inv_liner_top" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toEndOf="@id/line_items_inv" app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout android:id="@+id/vip_status" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginTop="10.0dip" android:layout_marginStart="10.0dip">
+            <ImageView android:layout_gravity="center" android:id="@+id/img_vip" android:layout_width="30.0dip" android:layout_height="30.0dip" app:srcCompat="@drawable/inv_icon_platinum_donate_res" />
+        </FrameLayout>
+        <FrameLayout android:id="@+id/nickname" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="155.0dip" android:layout_height="30.0dip" android:layout_marginTop="10.0dip" android:layout_marginStart="7.0dip" app:layout_constraintStart_toEndOf="@id/vip_status" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:textSize="11.0sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@+id/nick_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DEV_REYTIZ (777)" android:textAllCaps="true" android:fontFamily="@font/muller_bold" />
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/elements_inv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginStart="10.0dip" app:layout_constraintStart_toEndOf="@id/line_items_inv" app:layout_constraintTop_toBottomOf="@id/inv_liner_top">
+        <FrameLayout android:id="@+id/element_row_inv_1" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent">
+            <ImageView android:layout_gravity="center" android:id="@+id/img_simcard" android:layout_width="26.0dip" android:layout_height="26.0dip" app:srcCompat="@drawable/inv_sim" />
+        </FrameLayout>
+        <FrameLayout android:id="@+id/element_row_inv_2" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout android:id="@+id/element_row_inv_3" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout android:id="@+id/element_row_inv_4" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout android:id="@+id/element_row_inv_5" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout android:id="@+id/element_row_inv_6" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout android:id="@+id/element_row_inv_7" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="2.0dip" app:layout_constraintStart_toEndOf="@id/nickname" app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+    <ImageView android:id="@+id/imageView29" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginTop="18.0dip" app:layout_constraintStart_toEndOf="@id/elements_inv" app:layout_constraintTop_toBottomOf="@id/inv_liner_top" app:srcCompat="@drawable/inv_icon_sim_card_res" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/linearLayout2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout android:gravity="center" android:id="@+id/inv_title" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="360.0dip" android:layout_height="30.0dip" android:layout_marginTop="10.0dip" app:layout_constraintStart_toEndOf="@id/inv_liner_top" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:textSize="12.0sp" android:textColor="@color/white" android:layout_gravity="start|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="инвентарь" android:textAllCaps="true" android:fontFamily="@font/muller_bold" android:layout_marginStart="8.0dip" />
+            <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" app:srcCompat="@drawable/inv_icon_weight_res" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/white" android:layout_gravity="start|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="вес" android:textAllCaps="true" android:fontFamily="@font/muller_bold" android:layout_marginStart="205.0dip" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/white" android:layout_gravity="start|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="40/50 кг" android:textAllCaps="true" android:fontFamily="@font/muller_bold" android:layout_marginStart="249.0dip" android:layout_marginEnd="20.0dip" />
+        </FrameLayout>
+        <LinearLayout android:orientation="vertical" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="360.0dip" android:layout_height="218.0dip" android:layout_marginTop="10.0dip">
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="7.0dip">
+                <FrameLayout android:id="@+id/inv_slot1" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="4.0dip" android:layout_marginStart="8.0dip">
+
+                    <ImageView
+                        android:id="@+id/img_slot1_inv"
+                        android:layout_width="45.0dip"
+                        android:layout_height="45.0dip"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/skin_adm" />
+
+                    <TextView
+                        android:id="@+id/text_arg1_inv"
+                        android:layout_width="19.0dip"
+                        android:layout_height="15.0dip"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="9.0dip"
+                        android:background="@drawable/inv_bg_button_action"
+                        android:fontFamily="@font/muller_medium"
+                        android:gravity="center"
+                        android:text="300"
+                        android:textColor="@color/white"
+                        android:textSize="9.0sp"
+                        android:visibility="gone" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot2" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="4.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot2_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg2_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/montserrat_medium" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot3" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="4.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot3_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg3_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/montserrat_medium" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot4" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="4.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot4_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg4_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/montserrat_medium" />
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                <FrameLayout android:id="@+id/inv_slot5" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="7.0dip" android:layout_marginStart="8.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot5_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg5_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/muller_medium" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot6" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="7.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot6_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg6_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/muller_medium" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot7" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="7.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot7_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg7_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/muller_medium" />
+                </FrameLayout>
+                <FrameLayout android:id="@+id/inv_slot8" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginTop="7.0dip" android:layout_marginStart="10.0dip">
+                    <ImageView android:layout_gravity="center" android:id="@+id/img_slot8_inv" android:visibility="gone" android:layout_width="45.0dip" android:layout_height="45.0dip" app:srcCompat="@drawable/aptech_inv" />
+                    <TextView android:textSize="9.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="end" android:id="@+id/text_arg8_inv" android:background="@drawable/inv_bg_button_action" android:visibility="gone" android:layout_width="19.0dip" android:layout_height="15.0dip" android:layout_marginTop="9.0dip" android:text="3" android:fontFamily="@font/muller_medium" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout android:orientation="horizontal" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="360.0dip" android:layout_height="75.0dip" android:layout_marginTop="10.0dip">
+            <FrameLayout android:id="@+id/inv_bg_text_item" android:background="@drawable/inv_bg_items_weight" android:visibility="gone" android:layout_width="48.0dip" android:layout_height="19.0dip" android:layout_marginBottom="17.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent">
+                <TextView android:textSize="11.5sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@+id/weight_item_inv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0,5 кг" android:fontFamily="@font/montserrat_bold" />
+            </FrameLayout>
+            <ImageView android:id="@+id/img_inv_item" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="30.0dip" android:layout_marginTop="8.0dip" android:layout_marginStart="35.0dip" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:srcCompat="@drawable/inv_sim" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/white" android:id="@+id/text_item_inv_title" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="SIM-Карта (тел. 7777)" android:fontFamily="@font/muller_bold" android:layout_marginStart="24.0dip" app:layout_constraintStart_toEndOf="@id/img_inv_item" app:layout_constraintTop_toTopOf="parent" />
+            <TextView android:textSize="9.0sp" android:textColor="@color/white" android:id="@+id/text_item_inv" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="SIM-Карта нужна для звонков и сообщений по\nтелефону" android:fontFamily="@font/muller_medium" android:layout_marginStart="24.0dip" app:layout_constraintStart_toEndOf="@id/img_inv_item" app:layout_constraintTop_toBottomOf="@id/text_item_inv_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="136.0dip" android:layout_height="122.0dip" android:layout_marginTop="65.0dip" android:layout_marginEnd="7.0dip" app:layout_constraintEnd_toStartOf="@id/linearLayout2" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/inv_use_button" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="135.0dip" android:layout_height="wrap_content">
+            <FrameLayout android:background="@drawable/inv_bg_button_action" android:layout_width="30.0dip" android:layout_height="30.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" app:srcCompat="@drawable/inv_icon_players_state_bag_res" />
+            </FrameLayout>
+            <TextView android:textSize="10.5sp" android:textColor="@color/white" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Использовать" android:textAllCaps="false" android:fontFamily="@font/muller_bold" android:layout_marginStart="8.0dip" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@+id/obmen_inv_but" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="135.0dip" android:layout_height="wrap_content" android:layout_marginTop="7.0dip">
+            <FrameLayout android:background="@drawable/inv_bg_button_action" android:layout_width="30.0dip" android:layout_height="30.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" app:srcCompat="@drawable/inv_icon_change_items_res" />
+            </FrameLayout>
+            <TextView android:textSize="10.5sp" android:textColor="@color/white" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Обмен" android:textAllCaps="false" android:fontFamily="@font/muller_bold" android:layout_marginStart="28.0dip" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@+id/delete_inv_button" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="135.0dip" android:layout_height="wrap_content" android:layout_marginTop="7.0dip">
+            <FrameLayout android:background="@drawable/inv_bg_button_action" android:layout_width="30.0dip" android:layout_height="30.0dip">
+                <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" app:srcCompat="@drawable/inv_icon_delete_items_res" />
+            </FrameLayout>
+            <TextView android:textSize="10.5sp" android:textColor="@color/white" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Удалить" android:textAllCaps="false" android:fontFamily="@font/muller_bold" android:layout_marginStart="26.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/inv_bg_not_active_item_in_list" android:layout_width="119.0dip" android:layout_height="43.0dip" android:layout_marginBottom="10.0dip" android:layout_marginStart="40.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/elements_inv">
+        <FrameLayout android:background="@drawable/inv_progress_bar" android:layout_width="40.0dip" android:layout_height="fill_parent" android:layout_marginEnd="7.0dip">
+            <ImageView android:layout_gravity="center" android:layout_width="20.0dip" android:layout_height="20.0dip" app:srcCompat="@drawable/inv_icon_players_state_bag_res" />
+        </FrameLayout>
+        <FrameLayout android:background="@drawable/inv_progress_bar" android:layout_width="40.0dip" android:layout_height="fill_parent">
+            <ImageView android:layout_gravity="center" android:layout_width="20.0dip" android:layout_height="20.0dip" app:srcCompat="@drawable/inv_icon_players_state_dinner_res" />
+        </FrameLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
