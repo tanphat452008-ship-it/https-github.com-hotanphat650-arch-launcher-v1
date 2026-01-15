@@ -1,2 +1,0 @@
-D:\LauncherPro\SARPCityMB\app\src\main\cpp\jni\Android.mk
-D:\LauncherPro\SARPCityMB\app\src\main\cpp\jni\Application.mk

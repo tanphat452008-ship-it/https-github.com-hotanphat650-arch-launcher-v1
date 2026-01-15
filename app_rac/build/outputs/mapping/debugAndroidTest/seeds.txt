@@ -1,8 +1,0 @@
-com.byreytiz.game.test.R
-com.byreytiz.game.test.BuildConfig
-com.byreytiz.game.test.BuildConfig: java.lang.String BUILD_TYPE
-com.byreytiz.game.test.BuildConfig: java.lang.String APPLICATION_ID
-com.byreytiz.game.test.BuildConfig: boolean DEBUG
-com.byreytiz.game.test.BuildConfig: <clinit>()
-com.byreytiz.game.test.BuildConfig: BuildConfig()
-com.byreytiz.game.test.R: R()
