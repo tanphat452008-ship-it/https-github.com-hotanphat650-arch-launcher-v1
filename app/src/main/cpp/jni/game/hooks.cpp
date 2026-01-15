@@ -24,15 +24,6 @@ extern CSettings* pSettings;
 extern CChatWindow* pChatWindow;
 extern CVoiceChatClient* pVoice;
 
-// *** THÊM VÀO ĐẦU FILE HOOKS.CPP (SAU CÁC INCLUDE) ***
-extern int GetServerFoodValue();
-extern int GetServerWaterValue();
-extern int GetServerCashValue();
-extern int GetServerBankValue();
-extern int GetServerStressValue();
-extern int GetPoliceOnlineValue();
-extern int GetPoliceMedicValue();
-
 //sanrelo.ru
 extern CAudioStream* pAudioStream;
 
@@ -192,33 +183,40 @@ uintptr_t GetTexture_hook(const char* a1)
     }
 }
 
-void ShowHud() {
-    if(pGame) {
-        if(pNetGame) {
-            if(pGame->FindPlayerPed() || GamePool_FindPlayerPed()) {
-                CPlayerPool *pPlayerPool = pNetGame->GetPlayerPool();
-                if(pPlayerPool) {
-                    // Tạm thời dùng method cũ với ít parameters
-                    g_pJavaWrapper->UpdateHudInfo(
-                        pGame->FindPlayerPed()->GetHealth(),
-                        pGame->FindPlayerPed()->GetArmour(),
-                        GetServerFoodValue(),    // food từ server
-                        GetServerWaterValue(),   // water từ server
-                        GamePool_FindPlayerPed()->WeaponSlots[GamePool_FindPlayerPed()->byteCurWeaponSlot].dwType,
-                        GamePool_FindPlayerPed()->WeaponSlots[GamePool_FindPlayerPed()->byteCurWeaponSlot].dwAmmo,
-                        (int)pPlayerPool->GetLocalPlayerID(),
-                        GetServerCashValue(),    // cash từ server
-                        pGame->GetWantedLevel(),
-                        GetServerStressValue(),
-                        GetPoliceOnlineValue(),
-                        GetPoliceMedicValue(),
-						GetServerBankValue()
-                    );
-                }
-            }
-        }
-    }
+void ShowHud() 
+{
+	if(pGame) 
+	{
+		if(pNetGame) 
+		{
+			if(pGame->FindPlayerPed() || GamePool_FindPlayerPed()) 
+			{
+				CPlayerPool *pPlayerPool = pNetGame->GetPlayerPool();
+				if(pPlayerPool) 
+				{
+					g_pJavaWrapper->UpdateHudInfo(
+					pGame->FindPlayerPed()->GetHealth(), 
+					pGame->FindPlayerPed()->GetArmour(), 
+					pGUI->GetEat(), 
+					GamePool_FindPlayerPed()->WeaponSlots[GamePool_FindPlayerPed()->byteCurWeaponSlot].dwType, 
+					GamePool_FindPlayerPed()->WeaponSlots[GamePool_FindPlayerPed()->byteCurWeaponSlot].dwAmmo, 
+					(int)pPlayerPool->GetLocalPlayerID(), 
+					pGame->GetLocalMoney(), pGame->GetWantedLevel()
+					);
+				}
+				if(pSettings && pSettings->GetReadOnly().iHud)
+				{
+					*(uint8_t*)(g_libGTASA+0x7165E8) = 0;
+				}
+				else if(pSettings && !pSettings->GetReadOnly().iHud)
+				{
+					*(uint8_t*)(g_libGTASA+0x7165E8) = 1;
+				}
+			}
+		}
+	}
 }
+
 
 /* ====================================================== */
 bool bGameStarted = false;

@@ -1020,43 +1020,17 @@ Java_com_nvidia_devtech_NvEventQueueActivity_sendDelInventory(JNIEnv* pEnv, jobj
 
 
 
-void CJavaWrapper::UpdateHudInfo(int health, int armour, int food, int water, int weaponid, int ammo, int playerid, int money, int wanted, int stress, int policeOnline, int policeMedic, int bankAccount) {
-    JNIEnv* env = GetEnv();
-    if (!env) {
-        Log("No env");
-        return;
-    }
-    
-    // Lấy username từ PlayerPool như code của bạn
-    char szNickBuf[256];
-    const char* playerName = "Unknown";
-    
-    if(pNetGame && pNetGame->GetPlayerPool()) {
-        CPlayerPool* pPlayerPool = pNetGame->GetPlayerPool();
-        if(pPlayerPool) {
-            const char* name = pPlayerPool->GetPlayerName(playerid);
-            if(name) {
-                // Tạo string với format "Name (ID)" như code của bạn
-                sprintf(szNickBuf, "%s (%d)", name, playerid);
-                playerName = szNickBuf;
-            } else {
-                // Fallback nếu không lấy được tên
-                sprintf(szNickBuf, "Player (%d)", playerid);
-                playerName = szNickBuf;
-            }
-        }
-    }
-    
-    // Tạo jstring cho username
-    jstring jusername = env->NewStringUTF(playerName);
-    
-    // Gọi Java method với 12 int + 1 String
-    env->CallVoidMethod(this->activity, this->s_updateHudInfo, 
-                        health, armour, food, water, weaponid, ammo, 
-                        playerid, money, wanted, stress, policeOnline, policeMedic, bankAccount, jusername);
-    
-    // Cleanup
-    env->DeleteLocalRef(jusername);
+void CJavaWrapper::UpdateHudInfo(int health, int armour, int hunger, int weaponidweik, int ammo, int ammoinclip, int money, int wanted)
+{
+	JNIEnv* env = GetEnv();
+
+	if (!env)
+	{
+		Log("No env");
+		return;
+	}
+
+	env->CallVoidMethod(this->activity, this->s_updateHudInfo, health, armour, hunger, weaponidweik, ammo, ammoinclip, money, wanted);
 }
 
 void CJavaWrapper::SetPauseState(bool a1)
@@ -1315,8 +1289,7 @@ CJavaWrapper::CJavaWrapper(JNIEnv* env, jobject activity)
 	s_SetUseFullScreen = env->GetMethodID(nvEventClass, "setUseFullscreen", "(I)V");
 	s_MakeDialog = env->GetMethodID(nvEventClass, "showDialog", "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 
-	s_updateHudInfo = env->GetMethodID(nvEventClass, "updateHudInfo", "(IIIIIIIIIIIIILjava/lang/String;)V");
-	
+	s_updateHudInfo = env->GetMethodID(nvEventClass, "updateHudInfo", "(IIIIIIII)V");
                   s_showHud = env->GetMethodID(nvEventClass, "showHud", "()V");
                   s_hideHud = env->GetMethodID(nvEventClass, "hideHud", "()V");
 

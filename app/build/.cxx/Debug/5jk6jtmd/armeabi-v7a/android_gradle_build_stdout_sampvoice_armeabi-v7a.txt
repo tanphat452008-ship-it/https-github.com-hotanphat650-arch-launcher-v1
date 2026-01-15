@@ -1,0 +1,3 @@
+[armeabi-v7a] Compile++ thumb: sampvoice <= netgame.cpp
+[armeabi-v7a] Compile++ thumb: sampvoice <= gui.cpp
+[armeabi-v7a] SharedLibrary  : libsampvoice.so

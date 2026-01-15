@@ -79,27 +79,6 @@ public class BrDialogWindow {
         return fArr;
     }
 
-    // Phương thức mới để tính toán chiều rộng tối đa cho mỗi cột
-    private float[] calculateMaxColumnWidths(TextView textView, String[] strArr) {
-        float[] maxWidths = new float[5]; // Số cột tối đa
-        TextPaint textPaint = new TextPaint();
-        textPaint.setTextSize(textView.getTextSize());
-        textPaint.setTypeface(textView.getTypeface());
-
-        for (String row : strArr) {
-            String[] columns = getSplittedTabs(Utils.removeColorCodes(row));
-            for (int colIndex = 0; colIndex < columns.length; colIndex++) {
-                if (colIndex < maxWidths.length) {
-                    float columnWidth = new StaticLayout(columns[colIndex], textPaint, 10000, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false).getLineWidth(0);
-                    if (columnWidth > maxWidths[colIndex]) {
-                        maxWidths[colIndex] = columnWidth;
-                    }
-                }
-            }
-        }
-        return maxWidths;
-    }
-
     private TextView createButtonFromOrig(TextView textView, boolean z, boolean z2) {
         TextView textView2 = new TextView(this.mActivity);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
@@ -107,26 +86,15 @@ public class BrDialogWindow {
             layoutParams.topMargin = NvEventQueueActivity.dpToPx(6.0f, this.mActivity);
         }
         textView2.setLayoutParams(layoutParams);
-
-        // Null checks to prevent crashes
-        if (textView != null) {
-            if (textView.getBackground() != null) {
-                textView2.setBackground(textView.getBackground());
-            }
-            if (textView.getTypeface() != null) {
-                textView2.setTypeface(textView.getTypeface());
-            }
-            textView2.setGravity(textView.getGravity());
-            if (!z2) {
-                textView2.setPadding(textView.getPaddingLeft(), textView.getPaddingTop(), textView.getPaddingRight(), textView.getPaddingBottom());
-            }
-            if (textView.getTextColors() != null) {
-                textView2.setTextColor(textView.getTextColors().getDefaultColor());
-            }
-            textView2.setTextSize(0, textView.getTextSize());
+        textView2.setBackground(textView.getBackground());
+        textView2.setTypeface(textView.getTypeface());
+        textView2.setGravity(textView.getGravity());
+        if (!z2) {
+            textView2.setPadding(textView.getPaddingLeft(), textView.getPaddingTop(), textView.getPaddingRight(), textView.getPaddingBottom());
         }
-
         textView2.setAllCaps(false);
+        textView2.setTextColor(textView.getTextColors().getDefaultColor());
+        textView2.setTextSize(0, textView.getTextSize());
         return textView2;
     }
 
@@ -156,24 +124,6 @@ public class BrDialogWindow {
             }
         }
         return fArr2;
-    }
-
-    // Helper method to extract last color from text
-    private String extractLastColor(String text) {
-        Pattern colorPattern = Pattern.compile("\\{([A-Fa-f0-9]{6})\\}");
-        java.util.regex.Matcher matcher = colorPattern.matcher(text);
-        String lastColor = "{FFFFFF}"; // default white
-
-        while (matcher.find()) {
-            lastColor = "{" + matcher.group(1) + "}";
-        }
-
-        return lastColor;
-    }
-
-    // Helper method to check if text starts with color code
-    private boolean hasColorCode(String text) {
-        return text != null && text.matches("^\\{[A-Fa-f0-9]{6}\\}.*");
     }
 
     public void show(int dialogId, int dialogTypeId, String caption, String content, String leftBtnText, String rightBtnText) {
@@ -285,9 +235,7 @@ public class BrDialogWindow {
             }
             TextView textView6 = this.mOrigButton;
             String[] splittedStrings = getSplittedStrings(str2);
-
-            final float[] maxWidths = z2 ? calculateMaxColumnWidths(textView6, splittedStrings) : null;
-
+            final float[] maxWidths = z2 ? getMaxWidths(getColumnsWidth(textView6, splittedStrings)) : null;
             if (z3) {
                 str5 = splittedStrings[0];
                 String[] strArr3 = new String[splittedStrings.length - 1];
@@ -297,18 +245,9 @@ public class BrDialogWindow {
                     linearLayout.getChildAt(i3).setVisibility(View.GONE);
                 }
                 for (int i4 = 0; i4 < splittedTabs.length; i4++) {
-                    if (i4 < linearLayout.getChildCount()) {
-                        TextView textView7 = (TextView) linearLayout.getChildAt(i4);
-                        textView7.setText(Utils.transfromColors(splittedTabs[i4]));
-                        textView7.setVisibility(View.VISIBLE);
-
-                        // Set equal weight for header columns
-                        LinearLayout.LayoutParams headerParams = (LinearLayout.LayoutParams) textView7.getLayoutParams();
-                        headerParams.weight = 1.0f;
-                        headerParams.width = 0;
-                        textView7.setLayoutParams(headerParams);
-                        textView7.setGravity(android.view.Gravity.CENTER_VERTICAL | android.view.Gravity.LEFT);
-                    }
+                    TextView textView7 = (TextView) linearLayout.getChildAt(i4);
+                    textView7.setText(Utils.transfromColors(splittedTabs[i4]));
+                    textView7.setVisibility(View.VISIBLE);
                 }
                 strArr = splittedTabs;
                 strArr2 = strArr3;
@@ -330,12 +269,8 @@ public class BrDialogWindow {
                 layoutParams.width = ((int) f) + NvEventQueueActivity.dpToPx(54.0f, this.mActivity);
                 if (z2) {
                     layoutParams.width = 0;
-                    float totalWidth = 0;
-                    for (float width : maxWidths) {
-                        totalWidth += width;
-                    }
-                    if (totalWidth > 0) {
-                        layoutParams.width = (int) (totalWidth + NvEventQueueActivity.dpToPx(24.0f, this.mActivity) + (maxWidths.length - 1) * NvEventQueueActivity.dpToPx(8.0f, this.mActivity));
+                    for (float f2 : maxWidths) {
+                        layoutParams.width = (int) (((float) layoutParams.width) + f2);
                     }
                 }
                 int textLength = Utils.getTextLength(textView322);
@@ -365,35 +300,26 @@ public class BrDialogWindow {
                         }
                         float[] fArr = maxWidths;
                         if (fArr != null) {
-                            float totalWidth = 0;
-                            for (float width : maxWidths) {
-                                totalWidth += width;
+                            int length = fArr.length;
+                            float[] fArr2 = new float[length];
+                            for (int i6 = 0; i6 < length; i6++) {
+                                fArr2[i6] = maxWidths[i6] / ((float) findViewById.getWidth());
                             }
-
-                            if (totalWidth > 0) {
-                                if (strArr != null) {
-                                    for (int i7 = 0; i7 < strArr.length; i7++) {
-                                        if (i7 < linearLayout.getChildCount()) {
-                                            TextView textView9 = (TextView) linearLayout.getChildAt(i7);
-                                            LinearLayout.LayoutParams layoutParams4 = (LinearLayout.LayoutParams) textView9.getLayoutParams();
-                                            layoutParams4.weight = maxWidths[i7] / totalWidth;
-                                            layoutParams4.width = 0; // Use weight
-                                            textView9.setLayoutParams(layoutParams4);
-                                        }
-                                    }
+                            if (strArr != null) {
+                                for (int i7 = 0; i7 < strArr.length; i7++) {
+                                    TextView textView9 = (TextView) linearLayout.getChildAt(i7);
+                                    LinearLayout.LayoutParams layoutParams4 = (LinearLayout.LayoutParams) textView9.getLayoutParams();
+                                    layoutParams4.weight = 1.0f - fArr2[i7];
+                                    textView9.setLayoutParams(layoutParams4);
                                 }
-
-                                for (int i8 = 0; i8 < linearLayout2.getChildCount(); i8++) {
-                                    if (linearLayout2.getChildAt(i8) instanceof LinearLayout) {
-                                        LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(i8);
-                                        for (int i9 = 0; i9 < linearLayout3.getChildCount(); i9++) {
-                                            if (i9 < maxWidths.length) {
-                                                LinearLayout.LayoutParams layoutParams5 = (LinearLayout.LayoutParams) linearLayout3.getChildAt(i9).getLayoutParams();
-                                                layoutParams5.weight = maxWidths[i9] / totalWidth;
-                                                layoutParams5.width = 0; // Use weight
-                                                linearLayout3.getChildAt(i9).setLayoutParams(layoutParams5);
-                                            }
-                                        }
+                            }
+                            for (int i8 = 0; i8 < linearLayout2.getChildCount(); i8++) {
+                                if (linearLayout2.getChildAt(i8) instanceof LinearLayout) {
+                                    LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(i8);
+                                    for (int i9 = 0; i9 < linearLayout3.getChildCount(); i9++) {
+                                        LinearLayout.LayoutParams layoutParams5 = (LinearLayout.LayoutParams) linearLayout3.getChildAt(i9).getLayoutParams();
+                                        layoutParams5.weight = 1.0f - fArr2[i9];
+                                        linearLayout3.getChildAt(i9).setLayoutParams(layoutParams5);
                                     }
                                 }
                             }
@@ -405,69 +331,23 @@ public class BrDialogWindow {
                 while (i6 < strArr2.length) {
                     if (z2) {
                         LinearLayout linearLayout3 = new LinearLayout(this.mActivity);
-                        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
                         if (i6 >= 1) {
                             layoutParams2.topMargin = NvEventQueueActivity.dpToPx(6.0f, this.mActivity);
                         }
                         linearLayout3.setLayoutParams(layoutParams2);
                         linearLayout3.setOrientation(LinearLayout.HORIZONTAL);
-                        // linearLayout3.setWeightSum(tabColumns.length); // Remove this line
-                        linearLayout3.setPadding(
-                                NvEventQueueActivity.dpToPx(12.0f, this.mActivity),
-                                textView8.getPaddingTop(),
-                                NvEventQueueActivity.dpToPx(12.0f, this.mActivity),
-                                textView8.getPaddingBottom()
-                        );
+                        linearLayout3.setPadding(textView8.getPaddingLeft(), textView8.getPaddingTop(), textView8.getPaddingRight(), textView8.getPaddingBottom());
                         linearLayout3.setBackground(ResourcesCompat.getDrawable(this.mActivity.getResources(), R.drawable.br_list_inactive, null));
                         linearLayout2.addView(linearLayout3);
-
-                        // Color handling for tablist
-                        String carryColor = "{FFFFFF}"; // Default white color
-                        String[] tabColumns = getSplittedTabs(strArr2[i6]);
-
-                        for (int colIndex = 0; colIndex < tabColumns.length; colIndex++) {
-                            String str6 = tabColumns[colIndex];
-                            TextView textView77 = createButtonFromOrig(textView8, true, false);
+                        for (String str6 : getSplittedTabs(strArr2[i6])) {
+                            TextView textView77 = createButtonFromOrig(textView, true, false);
                             TextView textView = new TextView(mActivity);
-
-                            // Handle color codes properly
-                            if (hasColorCode(str6)) {
-                                // This column has a color code, use it and update carry color
-                                carryColor = extractLastColor(str6);
-                                textView.setText(Utils.transfromColors(str6));
-                            } else {
-                                // No color code, apply the carry color
-                                textView.setText(Utils.transfromColors(carryColor + str6));
-                            }
-
-                            if (textView77 != null) {
-                                textView.setTypeface(textView77.getTypeface());
-                                textView.setTextSize(0, textView77.getTextSize()); // Dùng kích thước văn bản gốc
-                            } else {
-                                textView.setTextSize(13); // Mặc định nếu không tìm thấy
-                            }
-
-                            // Set proper layout params for equal distribution
-                            LinearLayout.LayoutParams columnParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                            // Remove weight calculation here and rely on onGlobalLayoutListener
-                            columnParams.width = 0; // Set width to 0 to be filled by weight
-                            columnParams.weight = 1.0f; // Temporary weight
-
-                            // Add margins between columns
-                            if (colIndex > 0) {
-                                columnParams.leftMargin = NvEventQueueActivity.dpToPx(8.0f, this.mActivity);
-                            }
-                            if (colIndex < tabColumns.length - 1) {
-                                columnParams.rightMargin = NvEventQueueActivity.dpToPx(8.0f, this.mActivity);
-                            }
-
-                            textView.setLayoutParams(columnParams);
-                            textView.setGravity(android.view.Gravity.CENTER_VERTICAL | android.view.Gravity.LEFT);
-
+                            textView.setText(Utils.transfromColors(str6));
+                            textView.setTypeface(textView77.getTypeface());
+                            textView.setTextSize(13);
                             linearLayout3.addView(textView);
                         }
-
                         if(i6 == 0) {
                             mSelectedButton = linearLayout3;
                             mClickedButton = 1;
@@ -505,7 +385,7 @@ public class BrDialogWindow {
                             textView2 = createButtonFromOrig(textView, false, false);
                         }
                     }
-                    int finalI = i6;
+                        int finalI = i6;
                     if(!z2) {
                         textView2.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -554,10 +434,7 @@ public class BrDialogWindow {
                 if (i22 != 66) {
                     return false;
                 };
-                InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
-                }
+                ((InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
                 mEditText.setFocusable(false);
                 mEditText.setFocusableInTouchMode(true);
                 return true;

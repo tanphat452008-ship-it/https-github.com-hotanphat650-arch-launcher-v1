@@ -12,7 +12,6 @@
         android:layout_height="24dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/gpstd"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/grzona"
         app:layout_constraintTop_toBottomOf="@+id/grzona" />
 
@@ -191,7 +190,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/greenzonatd"
-        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
@@ -199,7 +197,6 @@
         android:id="@+id/imageView17"
         android:layout_width="25dp"
         android:layout_height="14dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/logobr"
         app:layout_constraintStart_toEndOf="@+id/logobr"
         app:layout_constraintTop_toTopOf="@+id/logobr"
@@ -222,7 +219,6 @@
         android:layout_height="87dp"
         android:layout_marginStart="7dp"
         android:layout_marginTop="10dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintStart_toEndOf="@+id/hud_weapon"
         app:layout_constraintTop_toTopOf="@+id/imageView"

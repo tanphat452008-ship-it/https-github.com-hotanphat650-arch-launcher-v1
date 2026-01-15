@@ -90,9 +90,7 @@ public:
 
 	void SetUseFullScreen(int b);
 
-	// Trong CJavaWrapper class:
-	void UpdateHudInfo(int health, int armour, int food, int water, int weaponid, int ammo, int playerid, int money, int wanted, int stress, int policeOnl, int medicOnl, int bankAccount);
-
+	void UpdateHudInfo(int health, int armour, int hunger, int weaponidweik, int ammo, int ammoinclip, int money, int wanted);
 	void ShowHud();
                   void HideHud();
 

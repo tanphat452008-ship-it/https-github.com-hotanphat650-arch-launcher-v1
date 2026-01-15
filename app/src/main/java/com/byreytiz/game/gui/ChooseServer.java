@@ -72,33 +72,33 @@ public class ChooseServer {
         allButton = aactivity.findViewById(R.id.all_servers_button);
         progressbar = aactivity.findViewById(R.id.progress_bar);
         mServers = new ArrayList<Servers>();
-
+        
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://vbd.fdv.dd/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+				.baseUrl("http://vbd.fdv.dd/")
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
 
-        Interface sInterface = retrofit.create(Interface.class);
+		Interface sInterface = retrofit.create(Interface.class);
 
-        Call<List<Servers>> scall = sInterface.getServers();
+		Call<List<Servers>> scall = sInterface.getServers();
 
-        scall.enqueue(new Callback<List<Servers>>() {
-            @Override
-            public void onResponse(Call<List<Servers>> call, Response<List<Servers>> response) {
+		scall.enqueue(new Callback<List<Servers>>() {
+			@Override
+			public void onResponse(Call<List<Servers>> call, Response<List<Servers>> response) {
 
-                List<Servers> servers = response.body();
+				List<Servers> servers = response.body();
 
-                for (Servers server : servers) {
-                    mServers.add(new Servers(server.getColor(), server.getDopname(), server.getname(), server.getOnline(), server.getmaxOnline()));
-                }
-            }
+				for (Servers server : servers) {
+					mServers.add(new Servers(server.getColor(), server.getDopname(), server.getname(), server.getOnline(), server.getmaxOnline()));
+				}
+			}
 
-            @Override
-            public void onFailure(Call<List<Servers>> call, Throwable t) {
-                Toast.makeText(activity, "Не удалось подключится к серверу, попробуйте перезайти", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+			@Override
+			public void onFailure(Call<List<Servers>> call, Throwable t) {
+				Toast.makeText(activity, "Не удалось подключится к серверу, попробуйте перезайти", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
         Utils.HideLayout(serverLayout, false);
     }
 
@@ -108,36 +108,26 @@ public class ChooseServer {
             progressbar.setProgress(percent);
         }
         else {
-            // Animation ngắn rồi tự động vào game
             chooseServerLayout.setVisibility(View.VISIBLE);
             chooseServerLayout.setAlpha(0.0f);
-            chooseServerLayout.animate()
-            .setDuration(500) // Giảm thời gian animation
-            .alpha(1.0f)
-            .setListener(new Animator.AnimatorListener() {
+            chooseServerLayout.animate().setDuration(2000).alpha(1.0f).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationCancel(Animator animator) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+                }
+
                 @Override
                 public void onAnimationStart(Animator animator) {
-                    initUi(); // Vẫn init UI để có dữ liệu
+                    initUi();
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
-//                            loadingLayout.setVisibility(View.GONE);
-
-                    // Tự động click nút play sau animation
-                    try {
-                        String str = "fsdf";
-                        NvEventQueueActivity.getInstance().sendRPC(2, str.getBytes("windows-1251"), type);
-                        Utils.HideLayout(serverLayout, true);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                    loadingLayout.setVisibility(View.GONE);
                 }
-
-                @Override
-                public void onAnimationCancel(Animator animator) {}
-                @Override
-                public void onAnimationRepeat(Animator animator) {}
             }).start();
         }
     }

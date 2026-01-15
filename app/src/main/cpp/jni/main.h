@@ -10,7 +10,7 @@
 
 #define SA_ADDR(addr) (g_libGTASA + (addr))
 
-#define SAMP_VERSION	"SA-RP"
+#define SAMP_VERSION	"0.3.7"
 #define PORT_VERSION	"0.69"
 
 #define MAX_PLAYERS		1004

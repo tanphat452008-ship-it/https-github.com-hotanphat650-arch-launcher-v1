@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.byreytiz.game.app-mergeDebugResources-32:/values-sw360dp-v13/values-sw360dp-v13.xml",
+            "outputFile": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw360dp-v13\\values-sw360dp-v13.xml",
             "map": [
                 {
                     "source": "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\res\\values-sw360dp\\dimens.xml",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\cd205b01a0ba588992676d89e93d26c1\\transformed\\preference-1.1.1\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-3\\245285315bbc8412b0d592b76a8cb7ea\\transformed\\preference-1.1.1\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

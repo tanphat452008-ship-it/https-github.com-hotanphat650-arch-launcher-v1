@@ -1,0 +1,8 @@
+# compiler: R8
+# compiler_version: 3.0.76
+# min_api: 21
+# pg_map_id: 883c8ca
+# common_typos_disable
+com.byreytiz.game.test.BuildConfig -> com.byreytiz.game.test.BuildConfig:
+    7:7:void <clinit>() -> <clinit>
+    6:6:void <init>() -> <init>

@@ -1614,13 +1614,7 @@ public static void fixEditTextForAndroid10Xiaomi(EditText editText) {
 
     public native void sendDialogResponse(int i, int i2, int i3, byte[] str);
 
-    // Trong NvEventQueueActivity.java
-    public void updateHudInfo(int health, int armour, int food, int water, int weaponid, int ammo, int playerid, int money, int wanted, int stress, int policeOnline, int policeMedic, int bankAccount, String tennguoichoi) {
-        runOnUiThread(() -> {
-            // Trực tiếp chuyền tất cả cho HudManager
-            mHudManager.UpdateHudInfo(health, armour, food, water, weaponid, ammo, playerid, money, wanted, stress, policeOnline, policeMedic, bankAccount, tennguoichoi);
-        });
-    }
+    public void updateHudInfo(int health, int armour, int hunger, int weaponidweik, int ammo, int playerid, int money, int wanted) { runOnUiThread(() -> { mHudManager.UpdateHudInfo(health, armour, hunger, weaponidweik, ammo, playerid, money, wanted); }); }
 
     public void showHud() { runOnUiThread(() -> { mHudManager.ShowHud(); }); }
     //public void showTest() { runOnUiThread(() -> { //тут уже действие, надеюсь понятно }); }

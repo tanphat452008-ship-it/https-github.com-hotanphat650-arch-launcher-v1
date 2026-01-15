@@ -1,0 +1,4 @@
+#Wed Aug 13 14:05:59 ICT 2025
+base.0=D\:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\dex\\debug\\minifyDebugWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

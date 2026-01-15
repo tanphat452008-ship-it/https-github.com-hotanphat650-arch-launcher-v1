@@ -23,9 +23,9 @@ public:
     bool m_bMemDebugOn = false;
 
 	void Render();
-	void RenderGUI();
-	void TaylyxText();
-	void RenderServer();
+                  void RenderGUI();
+                  void TaylyxText();
+                  void RenderServer();
 	void ShowSpeed();
 	void SetHealth(float fHealth);
 	int GetHealth();

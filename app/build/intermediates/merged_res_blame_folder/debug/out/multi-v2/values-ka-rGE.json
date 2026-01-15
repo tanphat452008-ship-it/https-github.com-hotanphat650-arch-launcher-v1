@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.byreytiz.game.app-mergeDebugResources-32:/values-ka-rGE/values-ka-rGE.xml",
+            "outputFile": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ka-rGE\\values-ka-rGE.xml",
             "map": [
                 {
                     "source": "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\res\\values-ka-rGE\\strings.xml",

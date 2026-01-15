@@ -61,7 +61,7 @@ void SetUpGLHooks();
 
 void PrintBuildInfo()
 {
-       Log("Client by nDP");
+       Log("Client by Taylyx");
 }
 
 #ifdef GAME_EDITION_CR

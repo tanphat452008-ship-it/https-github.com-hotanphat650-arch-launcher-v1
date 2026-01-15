@@ -15,20 +15,23 @@ extern CGUI* pGUI;
 extern CChatWindow* pChatWindow;
 
 char CLocalisation::m_szMessages[E_MSG::MSG_COUNT][MAX_LOCALISATION_LENGTH] = {
-   "Dang ket noi den may chu SA-RP City...",
-   "Da ket noi. Dang ket noi den server...",
-   "Mat ket noi voi server, dang ket noi lai...",
-   "{00CCFF}[SA-RP.NET] {FFFFFF}Chao mung ban da den voi SA-RP City!",
-   "unused",
-   "Khong the khoi tao game. Hay dong tat ca game va khoi dong lai launcher.",
-   "Dang thu ket noi den server, se ket noi lai sau vai giay...",
-   "Dang thu ket noi den server, se ket noi lai sau vai giay...",
-   "Mat ket noi. Dang ket noi lai..."
+        "Соединение к taylyx...",
+  "Подключено. Подготовка к игре...",
+  "Сервер закрыл доступ, перезайдите...",
+  "{00CCFF}[DEBUG] {FFFFFF}ClientStarted!",
+  "unused",
+  "Вы были заблокированы сервером. Выйдите из игры и подключитесь заново.",
+  "Потеряно соеденение с сервером, переподключение через пару секунд...",
+  "Потеряно соеденение с сервером, переподключение через пару секунд...",
+  "Сервер полон. Переподключение..."
+
+
+
 };
 
 void CLocalisation::Initialise(const char* szFile)
 {
-	Log("Initializing loader | by SA-RP City Team");
+	Log("Initializing loader | by Taylyx");
 	char buff[MAX_LOCALISATION_LENGTH];
 
 	sprintf(&buff[0], "%sSAMP/%s", g_pszStorage, szFile);

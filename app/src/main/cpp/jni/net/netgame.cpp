@@ -15,7 +15,6 @@ extern CNetGame* pNetGame;
 
 #define NETGAME_VERSION 4057
 #define AUTH_BS "10B3D2B1317ADD02CC1F680BC500A8BC0FD7AD42CE7"
-#define LAUNCHER_NAME "SARPCity2025"
 
 //#define AUTH_BS "E02262CF28BC542486C558D4BE9EFB716592AFAF8B"
 
@@ -31,45 +30,6 @@ extern CGUI *pGUI;
 
 int iVehiclePoolProcessFlag = 0;
 int iPickupPoolProcessFlag = 0;
-
-// *** THÊM VÀO ĐẦU FILE NETGAME.CPP ***
-// Global variables để lưu food data
-int g_PlayerCash = 100;
-int g_PlayerBank = 100;
-int g_PlayerFood = 100;
-int g_PlayerWater = 100;
-int g_PlayerStress = 100;
-int g_PoliceOnline = 100;
-int g_PoliceMedic = 100;
-
-// Getter functions
-int GetServerFoodValue() {
-    return g_PlayerFood;
-}
-
-int GetServerWaterValue() {
-    return g_PlayerWater;
-}
-
-int GetServerCashValue() {
-    return g_PlayerCash;
-}
-
-int GetServerBankValue() {
-    return g_PlayerBank;
-}
-
-int GetServerStressValue() {
-    return g_PlayerStress;
-}
-
-int GetPoliceOnlineValue() {
-    return g_PoliceOnline;
-}
-
-int GetPoliceMedicValue() {
-    return g_PoliceMedic;
-}
 
 void RegisterRPCs(RakClientInterface* pRakClient);
 void UnRegisterRPCs(RakClientInterface* pRakClient);
@@ -460,7 +420,6 @@ void CNetGame::Packet_TrailerSync(Packet* p)
 
 #define RPC_INVENTORY	0x45
 
-#define RPC_DATA_HUD	0x46
 
 #define RPC_SHOW_X2	0x181
 #define RPC_HIDE_X2	0x182
@@ -1107,33 +1066,9 @@ void CNetGame::Packet_CustomRPC(Packet* p)
 			g_pJavaWrapper->HideHudAndLogo();
 			return;
 		}
-		case RPC_DATA_HUD:
-		{
-			int cash, bank, food, water, stress, facOnline, fdsaOnline;
-    
-			bs.Read(cash);
-			bs.Read(bank); 
-			bs.Read(food);
-			bs.Read(water);
-			bs.Read(stress);
-			bs.Read(facOnline);
-			bs.Read(fdsaOnline);
-			
-			// Cập nhật global variables
-			g_PlayerCash = cash;
-			g_PlayerBank = bank;
-			g_PlayerFood = food;
-			g_PlayerWater = water;
-			g_PlayerStress = stress;
-			g_PoliceOnline = facOnline;
-			g_PoliceMedic = fdsaOnline;
-			
-			pChatWindow->AddDebugMessage("Updated all HUD data: Cash=%d Food=%d Water=%d Stress=%d Police=%d", 
-										cash, food, water, stress, facOnline);
-		}
 	}
-}
 
+}
 void CNetGame::SendDonateCar(int carid, int carcost)
 {
 			RakNet::BitStream bsSend;
@@ -1470,6 +1405,8 @@ void CNetGame::Packet_ConnectionSucceeded(Packet* pkt)
 		sum += std::atoi(s.c_str());
 	}
 
+	
+
 	if (g_isValidSum(sum))
 	{
 		WriteVerified1();
@@ -1498,17 +1435,6 @@ void CNetGame::Packet_ConnectionSucceeded(Packet* pkt)
 	CClientInfo::WriteClientInfoToBitStream(bsSend);
 
 	m_pRakClient->RPC(&RPC_ClientJoin, &bsSend, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, NULL);
-
-	// Custom Packet
-	RakNet::BitStream bsParams;
-	int8_t iVersionMobile = 1;
-	int8_t launcher = 0;
-	uint8_t byteLauncherLen = strlen(LAUNCHER_NAME);
-	bsParams.Write(launcher);
-	bsParams.Write(iVersionMobile);
-	bsParams.Write(byteLauncherLen);
-	bsParams.Write(LAUNCHER_NAME, byteLauncherLen);
-	m_pRakClient->RPC(&RPC_CustomJoin, &bsParams, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, NULL);
 }
 void CNetGame::Packet_PlayerSync(Packet* pkt)
 {

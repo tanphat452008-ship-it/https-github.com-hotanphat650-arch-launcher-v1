@@ -24,14 +24,6 @@ public class Utils {
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
 
-    public static String removeColorCodes(String text) {
-        if (text == null) {
-            return "";
-        }
-        Pattern colorPattern = Pattern.compile("\\{[A-Fa-f0-9]{6}\\}");
-        return colorPattern.matcher(text).replaceAll("");
-    }
-
     public static void ShowLayout(View view, boolean isAnim) {
         if (view != null) {
             view.setVisibility(View.VISIBLE);

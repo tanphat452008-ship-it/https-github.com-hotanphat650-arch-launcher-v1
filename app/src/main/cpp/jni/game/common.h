@@ -285,7 +285,7 @@ typedef struct _ENTITY_TYPE
 	VECTOR vecMoveSpeed; 	// 68-80	;vecMoveSpeed
 	VECTOR vecTurnSpeed; 	// 80-92	;vecTurnSpeed
 	PADDING(_pad94, 88);	// 92-180
-	uintptr_t dwUnkModelRel; // 180-184 ;пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	uintptr_t dwUnkModelRel; // 180-184 ;сотка инфа
 
 } ENTITY_TYPE;
 

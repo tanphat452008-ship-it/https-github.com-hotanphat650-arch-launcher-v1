@@ -1,0 +1,2 @@
+C:\javacollab\app\src\main\cpp\jni\Android.mk
+C:\javacollab\app\src\main\cpp\jni\Application.mk

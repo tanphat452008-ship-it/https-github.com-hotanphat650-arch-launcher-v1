@@ -4,11 +4,11 @@ import java.text.DecimalFormat;
 import java.io.File;
 
 public class Utils {
-    public static final long GB = 1073741824;
+	public static final long GB = 1073741824;
     public static final long KB = 1024;
     public static final long MB = 1048576;
-
-    public static String bytesIntoHumanReadable(long value) {
+	
+	public static String bytesIntoHumanReadable(long value) {
         long[] dividers = {GB, MB, KB, 1};
         String[] units = {"GB", "MB", "KB", "B"};
         if (value < 1) {
@@ -30,8 +30,8 @@ public class Utils {
         }
         return new DecimalFormat("#,##0.#").format(result) + " " + unit;
     }
-
-    public static void delete(File file) {
+	
+	public static void delete(File file) {
         if (file.exists()) {
             if (file.isDirectory()) {
                 for (File f : file.listFiles()) {

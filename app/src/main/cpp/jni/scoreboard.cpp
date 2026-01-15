@@ -111,70 +111,70 @@ void CScoreBoard::Draw()
     ImGui::End();
 }
 
-void CScoreBoard::Update() 
+void CScoreBoard::Toggle()
 {
-    if (!m_bToggle) return;
-    
-    // Get player list
-    pNetGame->UpdatePlayerScoresAndPings();
-
-    CPlayerPool* pPlayerPool = pNetGame->GetPlayerPool();
-    PLAYERID playercount = pPlayerPool->GetCount() + 1;
-    m_pPlayerCount = playercount;
-
-    if (m_iOffset > (playercount - 20)) m_iOffset = (playercount - 20);
-    if (m_iOffset < 0) m_iOffset = 0;
-
-    // Free old data
-    if (m_pPlayers)
+    m_bToggle = !m_bToggle;
+    if (m_bToggle)
     {
-        free(m_pPlayers);
-        m_pPlayers = nullptr;
-    }
+        // Freeze player
+        pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed()->TogglePlayerControllableWithoutLock(false);
 
-    m_pPlayers = (PLAYER_SCORE_INFO*)malloc(playercount * sizeof(PLAYER_SCORE_INFO));
-    if (!m_pPlayers) return;
-    memset(m_pPlayers, 0, playercount * sizeof(PLAYER_SCORE_INFO));
-    
-    // Local player - luôn index 0
-    PLAYERID idcuatoi = pPlayerPool->GetLocalPlayerID();
-    m_pPlayers[0].dwID = idcuatoi;
-    m_pPlayers[0].szName = pPlayerPool->GetLocalPlayerName();
-    m_pPlayers[0].iScore = pPlayerPool->GetLocalPlayerScore();
-    m_pPlayers[0].dwPing = pPlayerPool->GetLocalPlayerPing();
-    m_pPlayers[0].dwColor = pPlayerPool->GetLocalPlayer()->GetPlayerColorAsARGB();
-    
-    // Remote players - bắt đầu từ index 1
-    PLAYERID i = 1;
-    for (PLAYERID x = 0; x < MAX_PLAYERS; x++)
-    {
-        if (!pPlayerPool->GetSlotState(x)) continue;
-        
-        m_pPlayers[i].dwID = x; // ID thực từ server
-        m_pPlayers[i].szName = pPlayerPool->GetPlayerName(x);
-        m_pPlayers[i].iScore = pPlayerPool->GetRemotePlayerScore(x);
-        m_pPlayers[i].dwPing = pPlayerPool->GetRemotePlayerPing(x);
-        m_pPlayers[i].dwColor = pPlayerPool->GetAt(x)->GetPlayerColorAsARGB();
-        m_pPlayers[i].iState = (int)pPlayerPool->GetAt(x)->GetState();
-        
-        i++;
-        
-        if (i >= playercount) break;
-    }
+        // Get player list
+        pNetGame->UpdatePlayerScoresAndPings();
 
-    // Sắp xếp theo score nếu cần
-    if (m_bSorted)
-    {
-        for (PLAYERID i = 0; i < playercount - 1; i++)
+        CPlayerPool* pPlayerPool = pNetGame->GetPlayerPool();
+        PLAYERID playercount = pPlayerPool->GetCount() + 1;
+        m_pPlayerCount = playercount;
+
+        if (m_iOffset > (playercount - 20)) m_iOffset = (playercount - 20);
+        if (m_iOffset < 0) m_iOffset = 0;
+
+        m_pPlayers = (PLAYER_SCORE_INFO*)malloc(playercount * sizeof(PLAYER_SCORE_INFO));
+        memset(m_pPlayers, 0, playercount * sizeof(PLAYER_SCORE_INFO));
+        m_pPlayers[0].dwID = pPlayerPool->GetLocalPlayerID();
+        m_pPlayers[0].szName = pPlayerPool->GetLocalPlayerName();
+        m_pPlayers[0].iScore = pPlayerPool->GetLocalPlayerScore();
+        m_pPlayers[0].dwPing = pPlayerPool->GetLocalPlayerPing();
+        m_pPlayers[0].dwColor = pPlayerPool->GetLocalPlayer()->GetPlayerColorAsARGB();
+        PLAYERID i = 1, x;
+        for (x = 0; x < MAX_PLAYERS; x++)
         {
-            for (PLAYERID j = 0; j < playercount - 1 - i; j++)
+            if (!pPlayerPool->GetSlotState(x)) continue;
+            m_pPlayers[i].dwID = x;
+            m_pPlayers[i].szName = pPlayerPool->GetPlayerName(x);
+            m_pPlayers[i].iScore = pPlayerPool->GetRemotePlayerScore(x);
+            m_pPlayers[i].dwPing = pPlayerPool->GetRemotePlayerPing(x);
+            m_pPlayers[i].dwColor = pPlayerPool->GetAt(x)->GetPlayerColorAsARGB();
+            m_pPlayers[i].iState = (int)pPlayerPool->GetAt(x)->GetState();
+
+            i++;
+        }
+
+        if (m_bSorted)
+        {
+            for (i = 0; i < playercount - 1; i++)
             {
-                if (m_pPlayers[j + 1].iScore > m_pPlayers[j].iScore)
+                for (PLAYERID j = 0; j < playercount - 1 - i; j++)
                 {
-                    SwapPlayerInfo(&m_pPlayers[j], &m_pPlayers[j + 1]);
+                    if (m_pPlayers[j + 1].iScore > m_pPlayers[j].iScore)
+                    {
+                        SwapPlayerInfo(&m_pPlayers[j], &m_pPlayers[j + 1]);
+                    }
                 }
             }
         }
+    }
+    else
+    {
+        // Unfreeze player
+        pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed()->TogglePlayerControllableWithoutLock(true);
+
+        if (m_pPlayers)
+        {
+            memset(m_pPlayers, 0, m_pPlayerCount * sizeof(PLAYER_SCORE_INFO));
+            free(m_pPlayers);
+        }
+        m_pPlayers = 0;
     }
 }
 

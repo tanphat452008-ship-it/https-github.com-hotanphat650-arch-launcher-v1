@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.byreytiz.game.app-mergeDebugResources-32:/values-et-rEE/values-et-rEE.xml",
+            "outputFile": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-et-rEE\\values-et-rEE.xml",
             "map": [
                 {
                     "source": "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\res\\values-et-rEE\\strings.xml",

@@ -1,0 +1,2 @@
+C:\taylyxsource\app\src\main\cpp\jni\Android.mk
+C:\taylyxsource\app\src\main\cpp\jni\Application.mk

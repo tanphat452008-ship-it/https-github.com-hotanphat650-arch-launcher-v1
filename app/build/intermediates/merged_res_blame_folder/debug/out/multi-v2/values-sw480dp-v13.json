@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.byreytiz.game.app-mergeDebugResources-32:/values-sw480dp-v13/values-sw480dp-v13.xml",
+            "outputFile": "D:\\LauncherPro\\SARPCityMB\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw480dp-v13\\values-sw480dp-v13.xml",
             "map": [
                 {
                     "source": "D:\\LauncherPro\\SARPCityMB\\app\\src\\main\\res\\values-sw480dp\\dimens.xml",

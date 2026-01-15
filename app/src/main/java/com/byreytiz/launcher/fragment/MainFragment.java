@@ -70,7 +70,7 @@ public class MainFragment extends Fragment {
             }
         });
         
-        /*((ImageButton) inflate.findViewById(R.id.button_vk)).setOnClickListener(new OnClickListener() {
+        ((ImageButton) inflate.findViewById(R.id.button_vk)).setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
             	v.startAnimation(animation);
         	    Timer t = new Timer();
@@ -81,7 +81,7 @@ public class MainFragment extends Fragment {
                    }
                 }, 200L);
             }
-        });*/
+        });
         
         ((ImageButton) inflate.findViewById(R.id.button_discord)).setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
@@ -90,13 +90,13 @@ public class MainFragment extends Fragment {
                 t.schedule(new TimerTask(){
                    @Override
                    public void run() {
-                       startActivity(new Intent("android.intent.action.VIEW", Uri.parse("https://discrord.com/sarp2025")));
+                       startActivity(new Intent("android.intent.action.VIEW", Uri.parse("https://discrord.com/")));
                    }
                 }, 200L);
             }
         });
         
-        /*((ImageButton) inflate.findViewById(R.id.button_telegram)).setOnClickListener(new OnClickListener() {
+        ((ImageButton) inflate.findViewById(R.id.button_telegram)).setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
             	v.startAnimation(animation);
         	    Timer t = new Timer();
@@ -107,9 +107,9 @@ public class MainFragment extends Fragment {
                    }
                 }, 200L);
             }
-        });*/
+        });
         
-        ((AppCompatButton) inflate.findViewById(R.id.button_update_game)).setOnClickListener(new OnClickListener() {
+        ((AppCompatButton) inflate.findViewById(R.id.button_clean_game)).setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
             	v.startAnimation(animation);
         	    Timer t = new Timer();
