@@ -154,8 +154,6 @@ public class Dialog {
 
     ((TextView) mRightBtn.getChildAt(0))
             .setText(Utils.transfromColors(rightBtnText));
-
-    // ---------- BUTTON VISIBILITY ----------
     mRightBtn.setVisibility(
             rightBtnText.isEmpty() ? View.GONE : View.VISIBLE
     );
@@ -236,4 +234,5 @@ public class Dialog {
         this.mMainLayout.setLayoutParams(params);
     }
 }
+
 
