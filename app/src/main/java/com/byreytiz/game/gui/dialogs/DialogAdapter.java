@@ -46,71 +46,81 @@ public class DialogAdapter extends RecyclerView.Adapter {
         onBindViewHolder((ViewHolder) holder, position);
     }
 
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String[] headers = this.mFieldTexts.get(position).split("\t");
-        ArrayList<TextView> fields = new ArrayList<>();
-        for (int i = 0; i < headers.length; i++) {
-            TextView field = holder.mFields.get(i);
-            field.setText(Utils.transfromColors(headers[i].replace("\\t", "")));
+    @Override
+public void onBindViewHolder(ViewHolder holder, int position) {
+
+    String[] cols = mFieldTexts.get(position).split("\t");
+    int count = Math.min(cols.length, holder.mFields.size());
+
+    for (int i = 0; i < holder.mFields.size(); i++) {
+        TextView field = holder.mFields.get(i);
+
+        if (i < count) {
+            field.setText(Utils.transfromColors(cols[i].replace("\\t", "")));
             field.setVisibility(View.VISIBLE);
-            fields.add(field);
-        }
-        this.mFields.add(fields);
-        if (this.mCurrentSelectedPosition == position) {
-            ImageView imageView = holder.mFieldBg;
-            this.mCurrentSelectedView = imageView;
-            imageView.setVisibility(View.VISIBLE);
-            this.mOnClickListener.onClick(position, holder.mFields.get(0).getText().toString());
         } else {
-            holder.mFieldBg.setVisibility(View.GONE);
+            field.setText("");
+            field.setVisibility(View.GONE);
         }
-
-        holder.getView().setOnClickListener(view -> {
-            if (this.mCurrentSelectedPosition != holder.getAdapterPosition()) {
-                View view2 = this.mCurrentSelectedView;
-                if (view2 != null) {
-                    view2.setVisibility(View.GONE);
-                }
-                this.mCurrentSelectedPosition = holder.getAdapterPosition();
-                this.mCurrentSelectedView = holder.mFieldBg;
-                holder.mFieldBg.setVisibility(View.VISIBLE);
-                this.mOnClickListener.onClick(holder.getAdapterPosition(), holder.mFields.get(0).getText().toString());
-                return;
-            }
-            OnDoubleClickListener onDoubleClickListener = this.mOnDoubleClickListener;
-            if (onDoubleClickListener != null) {
-                onDoubleClickListener.onDoubleClick();
-            }
-        });
     }
 
+    holder.mFieldBg.setVisibility(
+            mCurrentSelectedPosition == position ? View.VISIBLE : View.GONE
+    );
+
+    holder.getView().setOnClickListener(v -> {
+        int pos = holder.getAdapterPosition();
+        if (pos == RecyclerView.NO_POSITION) return;
+
+        if (mCurrentSelectedPosition != pos) {
+            if (mCurrentSelectedView != null)
+                mCurrentSelectedView.setVisibility(View.GONE);
+
+            mCurrentSelectedPosition = pos;
+            mCurrentSelectedView = holder.mFieldBg;
+            holder.mFieldBg.setVisibility(View.VISIBLE);
+
+            if (mOnClickListener != null) {
+                mOnClickListener.onClick(
+                        pos,
+                        holder.mFields.get(0).getText().toString()
+                );
+            }
+        } else if (mOnDoubleClickListener != null) {
+            mOnDoubleClickListener.onDoubleClick();
+        }
+    });
+}
     public void updateSizes() {
-        int[] max = new int[4];
-        for (int i = 0; i < this.mFields.size(); i++) {
-            for (int j = 0; j < this.mFields.get(i).size(); j++) {
-                int width = this.mFields.get(i).get(j).getWidth();
-                if (max[j] < width) {
-                    max[j] = width;
-                }
-            }
-        }
-        for (int i2 = 0; i2 < max.length; i2++) {
-            int headerWidth = this.mFieldHeaders.get(i2).getWidth();
-            Log.i("DIALOG", max[i2] + "\t" + ((Object) this.mFieldHeaders.get(i2).getText()) + MaskedEditText.SPACE + headerWidth);
-            if (max[i2] < headerWidth) {
-                max[i2] = headerWidth;
-            }
-        }
-        for (int i3 = 0; i3 < this.mFields.size(); i3++) {
-            for (int j2 = 0; j2 < this.mFields.get(i3).size(); j2++) {
-                this.mFields.get(i3).get(j2).setWidth(max[j2]);
-            }
-        }
-        for (int i4 = 0; i4 < this.mFieldHeaders.size(); i4++) {
-            this.mFieldHeaders.get(i4).setWidth(max[i4]);
+    if (mFields.isEmpty()) return;
+
+    int columnCount = mFieldHeaders.size();
+    int[] max = new int[columnCount];
+
+    for (ArrayList<TextView> row : mFields) {
+        for (int j = 0; j < row.size() && j < columnCount; j++) {
+            int w = row.get(j).getWidth();
+            if (w > max[j]) max[j] = w;
         }
     }
 
+    for (int i = 0; i < columnCount; i++) {
+        int hw = mFieldHeaders.get(i).getWidth();
+        if (hw > max[i]) max[i] = hw;
+    }
+
+    for (ArrayList<TextView> row : mFields) {
+        for (int j = 0; j < row.size() && j < columnCount; j++) {
+            if (max[j] > 0)
+                row.get(j).setWidth(max[j]);
+        }
+    }
+
+    for (int i = 0; i < columnCount; i++) {
+        if (max[i] > 0)
+            mFieldHeaders.get(i).setWidth(max[i]);
+    }
+    }
     public void setOnClickListener(OnClickListener onClickListener) {
         this.mOnClickListener = onClickListener;
     }
@@ -147,3 +157,4 @@ public class DialogAdapter extends RecyclerView.Adapter {
         }
     }
 }
+
