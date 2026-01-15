@@ -1,160 +1,183 @@
 package com.byreytiz.game.gui.dialogs;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.byreytiz.game.R;
-import com.byreytiz.game.gui.util.MaskedEditText;
 import com.byreytiz.game.gui.util.Utils;
 
 import java.util.ArrayList;
 
-public class DialogAdapter extends RecyclerView.Adapter {
-    private int mCurrentSelectedPosition = 0;
+public class DialogAdapter
+        extends RecyclerView.Adapter<DialogAdapter.ViewHolder> {
+
+    private int mCurrentSelectedPosition = -1;
     private View mCurrentSelectedView;
-    private final ArrayList<TextView> mFieldHeaders;
+
     private final ArrayList<String> mFieldTexts;
-    private final ArrayList<ArrayList<TextView>> mFields;
+    private final ArrayList<TextView> mFieldHeaders;
+
+    // cache rows đã bind để updateSizes()
+    private final ArrayList<ArrayList<TextView>> mBoundRows = new ArrayList<>();
+
     private OnClickListener mOnClickListener;
     private OnDoubleClickListener mOnDoubleClickListener;
 
     public interface OnClickListener {
-        void onClick(int i, String str);
+        void onClick(int index, String text);
     }
 
     public interface OnDoubleClickListener {
         void onDoubleClick();
     }
 
-    public DialogAdapter(ArrayList<String> fields, ArrayList<TextView> fieldHeaders) {
-        this.mFieldTexts = fields;
-        this.mFieldHeaders = fieldHeaders;
-        this.mFields = new ArrayList<>();
+    public DialogAdapter(ArrayList<String> rows,
+                         ArrayList<TextView> headers) {
+        this.mFieldTexts = rows != null ? rows : new ArrayList<>();
+        this.mFieldHeaders = headers;
     }
 
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sd_dialog_item, parent, false));
-    }
+    // ================= ADAPTER =================
 
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        onBindViewHolder((ViewHolder) holder, position);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.sd_dialog_item, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-    String[] cols = mFieldTexts.get(position).split("\t");
-    int count = Math.min(cols.length, holder.mFields.size());
+        String[] cols = mFieldTexts.get(position).split("\t");
+        int count = Math.min(cols.length, holder.mFields.size());
 
-    for (int i = 0; i < holder.mFields.size(); i++) {
-        TextView field = holder.mFields.get(i);
-
-        if (i < count) {
-            field.setText(Utils.transfromColors(cols[i].replace("\\t", "")));
-            field.setVisibility(View.VISIBLE);
-        } else {
-            field.setText("");
-            field.setVisibility(View.GONE);
-        }
-    }
-
-    holder.mFieldBg.setVisibility(
-            mCurrentSelectedPosition == position ? View.VISIBLE : View.GONE
-    );
-
-    holder.getView().setOnClickListener(v -> {
-        int pos = holder.getAdapterPosition();
-        if (pos == RecyclerView.NO_POSITION) return;
-
-        if (mCurrentSelectedPosition != pos) {
-            if (mCurrentSelectedView != null)
-                mCurrentSelectedView.setVisibility(View.GONE);
-
-            mCurrentSelectedPosition = pos;
-            mCurrentSelectedView = holder.mFieldBg;
-            holder.mFieldBg.setVisibility(View.VISIBLE);
-
-            if (mOnClickListener != null) {
-                mOnClickListener.onClick(
-                        pos,
-                        holder.mFields.get(0).getText().toString()
-                );
+        for (int i = 0; i < holder.mFields.size(); i++) {
+            TextView tv = holder.mFields.get(i);
+            if (i < count) {
+                tv.setText(Utils.transfromColors(cols[i]));
+                tv.setVisibility(View.VISIBLE);
+            } else {
+                tv.setText("");
+                tv.setVisibility(View.GONE);
             }
-        } else if (mOnDoubleClickListener != null) {
-            mOnDoubleClickListener.onDoubleClick();
         }
-    });
-}
-    public void updateSizes() {
-    if (mFields.isEmpty()) return;
 
-    int columnCount = mFieldHeaders.size();
-    int[] max = new int[columnCount];
+        holder.mFieldBg.setVisibility(
+                mCurrentSelectedPosition == position
+                        ? View.VISIBLE
+                        : View.GONE
+        );
 
-    for (ArrayList<TextView> row : mFields) {
-        for (int j = 0; j < row.size() && j < columnCount; j++) {
-            int w = row.get(j).getWidth();
-            if (w > max[j]) max[j] = w;
+        if (!mBoundRows.contains(holder.mFields)) {
+            mBoundRows.add(holder.mFields);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+
+            if (mCurrentSelectedPosition != pos) {
+                if (mCurrentSelectedView != null)
+                    mCurrentSelectedView.setVisibility(View.GONE);
+
+                mCurrentSelectedPosition = pos;
+                mCurrentSelectedView = holder.mFieldBg;
+                holder.mFieldBg.setVisibility(View.VISIBLE);
+
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(
+                            pos,
+                            holder.mFields.get(0).getText().toString()
+                    );
+                }
+            } else if (mOnDoubleClickListener != null) {
+                mOnDoubleClickListener.onDoubleClick();
+            }
+        });
     }
 
-    for (int i = 0; i < columnCount; i++) {
-        int hw = mFieldHeaders.get(i).getWidth();
-        if (hw > max[i]) max[i] = hw;
-    }
-
-    for (ArrayList<TextView> row : mFields) {
-        for (int j = 0; j < row.size() && j < columnCount; j++) {
-            if (max[j] > 0)
-                row.get(j).setWidth(max[j]);
-        }
-    }
-
-    for (int i = 0; i < columnCount; i++) {
-        if (max[i] > 0)
-            mFieldHeaders.get(i).setWidth(max[i]);
-    }
-    }
-    public void setOnClickListener(OnClickListener onClickListener) {
-        this.mOnClickListener = onClickListener;
-    }
-
-    public void setOnDoubleClickListener(OnDoubleClickListener onDoubleClickListener) {
-        this.mOnDoubleClickListener = onDoubleClickListener;
-    }
-
-    public ArrayList<ArrayList<TextView>> getFields() {
-        return this.mFields;
-    }
-
+    @Override
     public int getItemCount() {
-        return this.mFieldTexts.size();
+        return mFieldTexts.size();
     }
+
+    // ================= TABLIST WIDTH =================
+
+    public void updateSizes() {
+        if (mBoundRows.isEmpty() || mFieldHeaders == null) return;
+
+        int columnCount = mFieldHeaders.size();
+        int[] max = new int[columnCount];
+
+        // rows
+        for (ArrayList<TextView> row : mBoundRows) {
+            for (int i = 0; i < row.size() && i < columnCount; i++) {
+                int w = row.get(i).getWidth();
+                if (w > max[i]) max[i] = w;
+            }
+        }
+
+        // headers
+        for (int i = 0; i < columnCount; i++) {
+            int hw = mFieldHeaders.get(i).getWidth();
+            if (hw > max[i]) max[i] = hw;
+        }
+
+        // apply rows
+        for (ArrayList<TextView> row : mBoundRows) {
+            for (int i = 0; i < row.size() && i < columnCount; i++) {
+                if (max[i] > 0) {
+                    row.get(i).setWidth(max[i]);
+                }
+            }
+        }
+
+        // apply headers
+        for (int i = 0; i < columnCount; i++) {
+            if (max[i] > 0) {
+                mFieldHeaders.get(i).setWidth(max[i]);
+            }
+        }
+    }
+
+    // ================= LISTENERS =================
+
+    public void setOnClickListener(OnClickListener l) {
+        this.mOnClickListener = l;
+    }
+
+    public void setOnDoubleClickListener(OnDoubleClickListener l) {
+        this.mOnDoubleClickListener = l;
+    }
+
+    // ================= VIEW HOLDER =================
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mFieldBg;
-        public ArrayList<TextView> mFields = new ArrayList<>();
-        private final View mView;
+
+        ImageView mFieldBg;
+        ArrayList<TextView> mFields = new ArrayList<>();
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.mView = itemView;
-            this.mFieldBg = (ImageView) itemView.findViewById(R.id.sd_dialog_item_bg);
-            ConstraintLayout field = itemView.findViewById(R.id.sd_dialog_item_main);
-            for (int i = 1; i < field.getChildCount(); i++) {
-                this.mFields.add((TextView) field.getChildAt(i));
-            }
-        }
 
-        public View getView() {
-            return this.mView;
+            mFieldBg = itemView.findViewById(R.id.sd_dialog_item_bg);
+
+            ConstraintLayout layout =
+                    itemView.findViewById(R.id.sd_dialog_item_main);
+
+            for (int i = 1; i < layout.getChildCount(); i++) {
+                View v = layout.getChildAt(i);
+                if (v instanceof TextView) {
+                    mFields.add((TextView) v);
+                }
+            }
         }
     }
 }
-
