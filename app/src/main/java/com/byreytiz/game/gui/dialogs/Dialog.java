@@ -81,51 +81,87 @@ public class Dialog {
         });
         Utils.HideLayout(this.mMainLayout, false);
     }
+    public void show(int dialogId, int dialogTypeId,
+                 String caption,
+                 String content,
+                 String leftBtnText,
+                 String rightBtnText) {
 
-    public void show(int dialogId, int dialogTypeId, String caption, String content, String leftBtnText, String rightBtnText) {
-        clearDialogData();
-        this.mCurrentDialogId = dialogId;
-        this.mCurrentDialogTypeId = dialogTypeId;
-        if (dialogTypeId == 0) {
-            this.mInputLayout.setVisibility(View.GONE);
-            this.mListLayout.setVisibility(View.GONE);
-            this.mMsgBoxLayout.setVisibility(View.VISIBLE);
-        }
-        else if(dialogTypeId == 1 || dialogTypeId == 3)
-        {
-            this.mInputLayout.setVisibility(View.VISIBLE); // выполняется инпут
-            this.mMsgBoxLayout.setVisibility(View.VISIBLE);
-            this.mListLayout.setVisibility(View.GONE);
-        }
-        else
-        {
-            this.mInputLayout.setVisibility(View.GONE);
-            this.mMsgBoxLayout.setVisibility(View.GONE); // LIST, TABLIST, TABLIST_HEADER
-            this.mListLayout.setVisibility(View.VISIBLE);
-            loadTabList(content);
-            ArrayList<String> fixFieldsForDialog = Utils.fixFieldsForDialog(this.mRowsList);
-            this.mRowsList = fixFieldsForDialog;
-            DialogAdapter adapter = new DialogAdapter(fixFieldsForDialog, this.mHeadersList);
-            adapter.setOnClickListener((i, str) -> { this.mCurrentListItem = i;
-            this.mCurrentInputText = str; });
-            adapter.setOnDoubleClickListener(() -> sendDialogResponse(1));
-            this.mCustomRecyclerView.setLayoutManager(new LinearLayoutManager((Context) NvEventQueueActivity.getInstance()));
-            this.mCustomRecyclerView.setAdapter(adapter);
-            if (dialogTypeId != 2) {
-                CustomRecyclerView customRecyclerView = this.mCustomRecyclerView;
-                adapter.getClass();
-                customRecyclerView.post(() -> adapter.updateSizes());
+    clearDialogData();
+
+    mCurrentDialogId = dialogId;
+    mCurrentDialogTypeId = dialogTypeId;
+
+    // Null safety
+    if (caption == null) caption = "";
+    if (content == null) content = "";
+    if (leftBtnText == null) leftBtnText = "";
+    if (rightBtnText == null) rightBtnText = "";
+    mInputLayout.setVisibility(View.GONE);
+    mListLayout.setVisibility(View.GONE);
+    mMsgBoxLayout.setVisibility(View.GONE);
+    if (dialogTypeId == DIALOG_STYLE_MSGBOX) {
+        mMsgBoxLayout.setVisibility(View.VISIBLE);
+
+    } else if (dialogTypeId == DIALOG_STYLE_INPUT ||
+               dialogTypeId == DIALOG_STYLE_PASSWORD) {
+
+        mInputLayout.setVisibility(View.VISIBLE);
+        mMsgBoxLayout.setVisibility(View.VISIBLE);
+
+        mInput.setText("");
+        mInput.requestFocus();
+
+    } else { // LIST / TABLIST / TABLIST_HEADER
+
+        mListLayout.setVisibility(View.VISIBLE);
+        loadTabList(content);
+
+        if (!mRowsList.isEmpty()) {
+            ArrayList<String> fixedRows =
+                    Utils.fixFieldsForDialog(mRowsList);
+            mRowsList = fixedRows;
+
+            DialogAdapter adapter =
+                    new DialogAdapter(fixedRows, mHeadersList);
+
+            adapter.setOnClickListener((i, str) -> {
+                if (i < 0 || i >= mRowsList.size()) return;
+                mCurrentListItem = i;
+                mCurrentInputText = str;
+            });
+
+            adapter.setOnDoubleClickListener(() ->
+                    sendDialogResponse(DIALOG_LEFT_BTN_ID));
+
+            mCustomRecyclerView.setLayoutManager(
+                    new LinearLayoutManager(NvEventQueueActivity.getInstance()));
+
+            mCustomRecyclerView.setAdapter(adapter);
+
+            if (dialogTypeId != DIALOG_STYLE_LIST) {
+                mCustomRecyclerView.post(adapter::updateSizes);
             }
         }
-        this.mCaption.setText(Utils.transfromColors(caption));
-        this.mContent.setText(Utils.transfromColors(content));
-        ((TextView) this.mLeftBtn.getChildAt(0)).setText(Utils.transfromColors(leftBtnText));
-        ((TextView) this.mRightBtn.getChildAt(0)).setText(Utils.transfromColors(rightBtnText));
-        if (rightBtnText.equals("")) { this.mRightBtn.setVisibility(View.GONE); }
-        else { this.mRightBtn.setVisibility(View.VISIBLE); }
-        Utils.ShowLayout(this.mMainLayout, true);
     }
 
+    // ---------- TEXT ----------
+    mCaption.setText(Utils.transfromColors(caption));
+    mContent.setText(Utils.transfromColors(content));
+
+    ((TextView) mLeftBtn.getChildAt(0))
+            .setText(Utils.transfromColors(leftBtnText));
+
+    ((TextView) mRightBtn.getChildAt(0))
+            .setText(Utils.transfromColors(rightBtnText));
+
+    // ---------- BUTTON VISIBILITY ----------
+    mRightBtn.setVisibility(
+            rightBtnText.isEmpty() ? View.GONE : View.VISIBLE
+    );
+
+    Utils.ShowLayout(mMainLayout, true);
+}
     public void hideWithoutReset() {
         Utils.HideLayout(this.mMainLayout, false);
     }
@@ -133,50 +169,71 @@ public class Dialog {
     public void showWithOldContent() {
         Utils.ShowLayout(this.mMainLayout, false);
     }
-
     public void sendDialogResponse(int btnId) {
-        if (!this.mCurrentInputText.equals(this.mInput.getText().toString())) {
-            this.mCurrentInputText = this.mInput.getText().toString();
-        }
-        ((InputMethodManager) NvEventQueueActivity.getInstance().getSystemService("input_method")).hideSoftInputFromWindow(this.mInput.getWindowToken(), 0);
-        try {
-            NvEventQueueActivity.getInstance().sendDialogResponse(btnId, this.mCurrentDialogId, this.mCurrentListItem, this.mCurrentInputText.getBytes("windows-1251"));
-            Utils.HideLayout(this.mMainLayout, true);
-        }
-        catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        }
+    if (mInput != null && mInput.getText() != null) {
+        mCurrentInputText = mInput.getText().toString();
     }
 
+    InputMethodManager imm =
+        (InputMethodManager) NvEventQueueActivity.getInstance()
+            .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+    if (imm != null && mInput != null) {
+        imm.hideSoftInputFromWindow(mInput.getWindowToken(), 0);
+    }
+
+    try {
+        NvEventQueueActivity.getInstance().sendDialogResponse(
+            btnId,
+            mCurrentDialogId,
+            mCurrentListItem,
+            mCurrentInputText.getBytes("windows-1251")
+        );
+        Utils.HideLayout(mMainLayout, true);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
     private void loadTabList(String content) {
-        String[] strings = content.split("\n");
-        for (int i = 0; i < strings.length; i++) {
-            if (this.mCurrentDialogTypeId == 5 && i == 0) {
-                String[] headers = strings[i].split("\t");
-                for (int j = 0; j < headers.length; j++) {
-                    this.mHeadersList.get(j).setText(Utils.transfromColors(headers[j]));
-                    this.mHeadersList.get(j).setVisibility(View.VISIBLE);
-                }
-            } else {
-                this.mRowsList.add(strings[i]);
+    if (content == null || content.isEmpty()) return;
+
+    String[] strings = content.split("\n");
+
+    for (int i = 0; i < strings.length; i++) {
+        if (this.mCurrentDialogTypeId == DIALOG_STYLE_TABLIST_HEADER && i == 0) {
+            String[] headers = strings[i].split("\t");
+            int count = Math.min(headers.length, mHeadersList.size());
+
+            for (int j = 0; j < count; j++) {
+                TextView header = mHeadersList.get(j);
+                header.setText(Utils.transfromColors(headers[j]));
+                header.setVisibility(View.VISIBLE);
             }
+        } else {
+            mRowsList.add(strings[i]);
         }
     }
-
+    }
     private void clearDialogData() {
-        this.mInput.setText("");
-        this.mCurrentDialogId = -1;
-        this.mCurrentDialogTypeId = -1;
-        this.mCurrentListItem = -1;
-        this.mRowsList.clear();
-        for (int i = 0; i < this.mHeadersList.size(); i++) {
-            this.mHeadersList.get(i).setVisibility(View.GONE);
-        }
-    }
+    mCurrentInputText = "";
+    mCurrentDialogId = -1;
+    mCurrentDialogTypeId = -1;
+    mCurrentListItem = -1;
 
+    if (mInput != null)
+        mInput.setText("");
+
+    mRowsList.clear();
+
+    for (TextView header : mHeadersList) {
+        header.setVisibility(View.GONE);
+        header.setText("");
+    }
+    }
     public void onHeightChanged(int height) {
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) this.mMainLayout.getLayoutParams();
         params.setMargins(0, 0, 0, height);
         this.mMainLayout.setLayoutParams(params);
     }
 }
+
