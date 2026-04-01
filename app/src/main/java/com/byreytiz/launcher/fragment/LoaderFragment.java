@@ -42,7 +42,7 @@ public class LoaderFragment extends Fragment {
     
     public void startDownload() {
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String url = "http://wh3606.web3.maze-host.ru//black-cache.7z";
+        String url = "https://drive.google.com/file/d/1T08EIvK7Eq_dR_x5qttYk6NcbwtbOyMy/view";
         createDownloadTask(url, folder.getPath()).start();
     }
 
@@ -72,7 +72,7 @@ public class LoaderFragment extends Fragment {
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
                         super.error(task, e);
-                        Toast.makeText(getActivity(), "Произошла ошибка начните заново установку", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Đã xảy ra lỗi, vui lòng bắt đầu cài đặt lại từ đầu", Toast.LENGTH_SHORT).show();
                         
                     }
 
@@ -90,7 +90,7 @@ public class LoaderFragment extends Fragment {
                     protected void completed(BaseDownloadTask task) {
                         super.completed(task);
                         
-                        textloading.setText("Распаковка...");
+                        textloading.setText("Giải nén...");
                         textprogress.setText("2/2");
                         textmb.setText("");
                         UnZipCache();
@@ -120,7 +120,7 @@ public class LoaderFragment extends Fragment {
     }
     
     public void afterDownload(){
-    	Toast.makeText(getActivity(), "Игра успешно установлена!", Toast.LENGTH_SHORT).show();
+    	Toast.makeText(getActivity(), "Trò chơi đã được cài đặt thành công!", Toast.LENGTH_SHORT).show();
          
     }
 }
