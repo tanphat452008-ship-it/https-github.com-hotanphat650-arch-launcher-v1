@@ -152,7 +152,7 @@ public class MainFragment extends Fragment {
 									 w.put("client", "name", nickname.getText().toString());
                                         Toast.makeText(
                                                 getActivity(),
-                                                "Ваш новый никнейм успешно сохранен!",
+                                                "Biệt danh mới của bạn đã được lưu thành công!",
                                                 Toast.LENGTH_SHORT).show();
 								 } else {
 									 checkValidNick();
@@ -160,7 +160,7 @@ public class MainFragment extends Fragment {
                                         w.store();
                                     } catch (IOException e) {
                                         e.printStackTrace();
-										Toast.makeText(getActivity(), "Установите игру!", Toast.LENGTH_SHORT).show();
+										Toast.makeText(getActivity(), "Hãy cài đặt game!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 return false;
@@ -231,15 +231,15 @@ public class MainFragment extends Fragment {
 	public boolean checkValidNick(){
 		EditText nick = (EditText)  getActivity().findViewById(R.id.editText);
 		if(nick.getText().toString().isEmpty()) {
-			Toast.makeText(getActivity(), "Введите ник", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Nhập nickname", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(!(nick.getText().toString().contains("_"))){
-			Toast.makeText(getActivity(), "Ник должен содержать символ \"_\"", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "tên nick phải chứa ký tự \"_\"", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(nick.getText().toString().length() < 4){
-			Toast.makeText(getActivity(), "Длина ника должна быть не менее 4 символов", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Độ dài tên nhân vật (nick) phải có ít nhất 4 ký tự", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		return true;
