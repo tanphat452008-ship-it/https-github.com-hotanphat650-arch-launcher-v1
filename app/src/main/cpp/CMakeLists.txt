@@ -7,8 +7,6 @@ include_directories(
 
 find_package(shadowhook REQUIRED CONFIG)
 
-# Thêm dòng này để tìm module Firebase qua Prefab
-find_package(firebase-crashlytics-ndk REQUIRED CONFIG)
 
 add_subdirectory(opus)
 add_subdirectory(samp)
