@@ -116,7 +116,7 @@ namespace firebase {
 		inline void Terminate() {
 			// no-op
 		}
-
+jint InitCrashlytics(JavaVM* vm, void* reserved);
 		inline void Log(const char* msg) {
 			detail::invoke([&](const detail::__crashlytics_context_t* context) {
 				context->__log(context->__ctx, msg);
