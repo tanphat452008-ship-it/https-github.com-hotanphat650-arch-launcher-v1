@@ -311,8 +311,7 @@ void install_readable_crash_handler() {
 
 // ==================== JNI Entry Point ====================
 
-extern "C" JNIEXPORT jint JNICALL
-JNI_OnLoad(JavaVM* vm, void* reserved) {
+jint InitCrashlytics(JavaVM* vm, void* reserved) {
     __android_log_print(ANDROID_LOG_INFO, "GTA_CRASH",
                         "🚀 GTA SA Readable Crash Logger v2.0");
     __android_log_print(ANDROID_LOG_INFO, "GTA_CRASH",
