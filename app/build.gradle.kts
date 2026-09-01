@@ -6,19 +6,25 @@ plugins {
 
 android {
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
+    getByName("debug") {
+        val keystoreFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
+        if (keystoreFile.exists()) {
+            storeFile = keystoreFile
             storePassword = "hayk2010"
             keyPassword = "hayk2010"
             keyAlias = "key0"
         }
-        create("release") {
-            storeFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
+    }
+    create("release") {
+        val keystoreFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
+        if (keystoreFile.exists()) {
+            storeFile = keystoreFile
             keyAlias = "key0"
             storePassword = "hayk2010"
             keyPassword = "hayk2010"
         }
     }
+}
 
     namespace = "com.rstarx.hexrays"
     compileSdk = 34
