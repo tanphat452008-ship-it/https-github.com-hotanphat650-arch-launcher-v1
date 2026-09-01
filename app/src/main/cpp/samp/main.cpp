@@ -379,6 +379,7 @@ void InitGui()
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
+    InitCrashlytics(vm, reserved);
     javaVM = vm;
     LOGI("SA-MP library loaded! Build time: " __DATE__ " " __TIME__);
 
