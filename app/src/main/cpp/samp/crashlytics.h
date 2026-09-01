@@ -19,6 +19,8 @@
 #include <memory>
 #include <functional>
 #include <dlfcn.h>
+#include <jni.h>
+
 
 /// @brief Firebase Crashlytics NDK API, for Android apps which use native code.
 ///
