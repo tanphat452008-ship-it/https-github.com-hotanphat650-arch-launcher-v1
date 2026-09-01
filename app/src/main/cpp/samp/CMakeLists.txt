@@ -31,9 +31,6 @@ include_directories(
 
 add_library(samp SHARED ${SOURCES})
 
-# Khai báo tìm kiếm thư viện Firebase Crashlytics từ Gradle Prefab
-find_package(firebase-crashlytics-ndk REQUIRED CONFIG)
-
 target_link_libraries(samp
         log
         android
@@ -45,9 +42,7 @@ target_link_libraries(samp
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/bass/libs/${ANDROID_ABI}/libbass_ssl.so
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/GlossHook/libs/${GLOSSHOOK_ABI}/libGlossHook.a
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/GlossHook/libs/${GLOSSHOOK_ABI}/libGlossHook.so
-        
-        # Link thư viện Firebase Crashlytics để sửa lỗi undefined symbol
-        firebase-crashlytics-ndk::crashlytics
+    
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w -s -g -pthread -Wall -O3 -fexceptions")
