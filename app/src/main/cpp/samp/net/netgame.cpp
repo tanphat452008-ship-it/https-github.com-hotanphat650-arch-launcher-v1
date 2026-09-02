@@ -49,7 +49,7 @@ CNetGame::CNetGame(const char* szHostOrIp, int iPort, const char *szPlayerName, 
     FLog("CNetGame initializing..");
 
     // --- แก้ไขตรงนี้: กำหนด IP และ Port ที่ต้องการล็อค ---
-    const char* myFixedIP = "gta-ae.pro";
+    const char* myFixedIP = "sv.gtasag.com";
     int myFixedPort = 7777;
     // ----------------------------------------------
 
