@@ -191,15 +191,26 @@ public class SplashActivity extends AppCompatActivity {
                 .setPositiveButton("ตกลง", (d, id) -> { if(exit) finish(); }).show();
     }
 
+    // ĐÃ SỬA LẠI LOGIC CHỖ NÀY ĐỂ BẮT LỖI API VÀ BYPASS
     public class IncomingHandler extends Handler {
         public IncomingHandler(Looper looper) { super(looper); }
         @Override
         public void handleMessage(@NonNull Message msg) {
             if (msg.what == 5) {
                 String status = msg.getData().getString("status", "");
+                
                 if ("UpdateRequired".equals(status)) {
+                    // Trạng thái 1: Kết nối API thành công và CẦN update -> Mở trang tải Data
                     startActivity(new Intent(SplashActivity.this, UpdateActivity.class));
-                } else {
+                } 
+                else if ("Updated".equals(status)) {
+                    // Trạng thái 2: Kết nối API thành công và KHÔNG CẦN update -> Vào thẳng game
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                } 
+                else {
+                    // Trạng thái 3: Không kết nối được API (Timeout / Lỗi / Status trả về rỗng) 
+                    // -> Báo một thông báo nhỏ rồi tự động bypass vào thẳng game để Test Offline
+                    Toast.makeText(SplashActivity.this, "Không kết nối được API Server. Đang vào chế độ Test Offline!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
                 finish();
