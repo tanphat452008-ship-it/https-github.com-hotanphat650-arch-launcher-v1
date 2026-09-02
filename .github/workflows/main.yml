@@ -1,4 +1,4 @@
-name: Build APK Windows (Release Version)
+Name: Build APK Windows (Release Version)
 
 on:
   push:
@@ -53,7 +53,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: success() # Chỉ chạy nếu build thành công
         with:
-          files: app/build/outputs/apk/debug/app-debug.apk
+          files: app/build/outputs/apk/debug/*.apk
           tag_name: build-${{ github.run_number }}
           name: Debug Build v${{ github.run_number }}
           body: |
