@@ -29,17 +29,12 @@ public class SplashActivity extends AppCompatActivity {
     private static final int ALL_FILES_REQUEST_CODE = 2222;
     private static final int BASIC_PERMISSION_CODE = 1111;
 
-    // BẬT/TẮT MODE TEST: Đặt true để bỏ qua hoàn toàn Service API và vào thẳng MainActivity test
-    private static final boolean BYPASS_API_FOR_TESTING = true;
-
+    // สิทธิ์ไมโครโฟน (พื้นที่จัดเก็บจะใช้ MANAGE_EXTERNAL_STORAGE แยกต่างหากสำหรับ Android 11+)
     private final String[] basicPermissions = {
             "android.permission.RECORD_AUDIO"
     };
 
-    public int mGpuType = 2;
-    public Messenger mMessenger;
-    public Messenger mService;
-    private boolean mIsBind = false;
+    public int mGpuType = 2; // Mặc định là ETC (2)
     private TextView statusText;
 
     @Override
@@ -49,19 +44,16 @@ public class SplashActivity extends AppCompatActivity {
 
         statusText = findViewById(R.id.br_ls_progress2);
 
-        Config.currentContext = this;
-        mMessenger = new Messenger(new IncomingHandler(Looper.getMainLooper()));
-
-        if (Util.isNetworkConnected(this)) {
-            detectGpuAndStart();
-        } else {
-            // Nếu bật Bypass thì không cần bắt buộc có mạng
-            if (BYPASS_API_FOR_TESTING) {
-                detectGpuAndStart();
-            } else {
-                showSimpleDialog("ไม่มีอินเทอร์เน็ต", "กรุณาเชื่อมต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล", true);
-            }
+        // 1. ตรวจสอบ Signature (Bảo vệ Launcher)
+        if(!SignatureChecker.isSignatureValid(this, getPackageName())) {
+            showSimpleDialog("แจ้งเตือน", "Launcher ไม่ถูกต้อง กรุณาใช้ของแท้", true);
+            return;
         }
+
+        Config.currentContext = this;
+
+        // 2. Bỏ qua check kết nối Internet để có thể Test Offline thoải mái
+        detectGpuAndStart();
     }
 
     private void detectGpuAndStart() {
@@ -76,6 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 Log.d(TAG, "GPU Type: " + mGpuType);
 
+                // เริ่มขั้นตอนการเช็คสิทธิ์บน UI Thread
                 runOnUiThread(() -> startPermissionSequence());
             }
             @Override public void onSurfaceChanged(GL10 gl, int w, int h) {}
@@ -92,12 +85,14 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startPermissionSequence() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // สำหรับ Samsung Android 11, 12, 13, 14
             if (Environment.isExternalStorageManager()) {
                 checkBasicPermissions();
             } else {
                 showAllFilesDialog();
             }
         } else {
+            // สำหรับ Android รุ่นเก่า
             checkBasicPermissions();
         }
     }
@@ -125,18 +120,8 @@ public class SplashActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO") != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, basicPermissions, BASIC_PERMISSION_CODE);
         } else {
-            proceedToNextStep();
-        }
-    }
-
-    private void proceedToNextStep() {
-        // NẾU BẬT MODE TEST -> VÀO THẲNG MAINACTIVITY, KHÔNG CHẠY UPDATESERVICE
-        if (BYPASS_API_FOR_TESTING) {
-            Toast.makeText(this, "Chế độ Test Offline: Đang vào MainActivity...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-        } else {
-            startUpdateService();
+            // ĐÃ CẤP QUYỀN -> VÀO THẲNG MAIN ACTIVITY
+            goToMainActivity();
         }
     }
 
@@ -144,6 +129,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ALL_FILES_REQUEST_CODE) {
+            // แก้ปัญหา Samsung อัปเดตสิทธิ์ช้า: หน่วงเวลา 1 วินาทีก่อนเช็คสถานะใหม่
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     if (Environment.isExternalStorageManager()) {
@@ -151,7 +137,7 @@ public class SplashActivity extends AppCompatActivity {
                         checkBasicPermissions();
                     } else {
                         Toast.makeText(this, "คุณยังไม่ได้อนุญาตสิทธิ์ไฟล์!", Toast.LENGTH_LONG).show();
-                        showAllFilesDialog();
+                        showAllFilesDialog(); // ถามซ้ำจนกว่าจะยอมเปิด
                     }
                 }
             }, 1000);
@@ -162,69 +148,27 @@ public class SplashActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == BASIC_PERMISSION_CODE) {
-            proceedToNextStep();
+            // CẤP QUYỀN XONG -> VÀO THẲNG MAIN ACTIVITY
+            goToMainActivity();
         }
     }
 
-    private void startUpdateService() {
-        try {
-            Intent intent = new Intent(this, UpdateService.class);
-            mIsBind = bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        } catch (Exception e) {
-            Log.e(TAG, "Service Bind Failed: " + e.getMessage());
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+    // --- HÀM MỚI: XỬ LÝ CHUYỂN TRANG BYPASS UPDATE ---
+    private void goToMainActivity() {
+        if (statusText != null) {
+            statusText.setText("กำลังเข้าสู่เกม..."); // Đang vào game...
         }
-    }
-
-    private final ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName name, IBinder iBinder) {
-            mService = new Messenger(iBinder);
-            checkUpdate();
-        }
-        public void onServiceDisconnected(ComponentName name) {
-            mService = null;
-            mIsBind = false;
-        }
-    };
-
-    public void checkUpdate() {
-        if (mService == null) return;
-        Message msg = Message.obtain(null, 0);
-        Bundle data = new Bundle();
-        data.putInt("gputype", mGpuType);
-        msg.setData(data);
-        msg.replyTo = mMessenger;
-        try { mService.send(msg); } catch (RemoteException e) { e.printStackTrace(); }
+        
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        // Truyền tham số GPU qua Main (Tránh Main bị NullPointerException nếu nó cần lấy dữ liệu này)
+        intent.putExtra("gputype", mGpuType); 
+        
+        startActivity(intent);
+        finish(); // Đóng SplashActivity
     }
 
     private void showSimpleDialog(String title, String msg, boolean exit) {
         new AlertDialog.Builder(this).setTitle(title).setMessage(msg).setCancelable(false)
                 .setPositiveButton("ตกลง", (d, id) -> { if(exit) finish(); }).show();
-    }
-
-    public class IncomingHandler extends Handler {
-        public IncomingHandler(Looper looper) { super(looper); }
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            if (msg.what == 5) {
-                String status = msg.getData().getString("status", "");
-                if ("UpdateRequired".equals(status)) {
-                    startActivity(new Intent(SplashActivity.this, UpdateActivity.class));
-                } else {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                }
-                finish();
-            }
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(mIsBind) {
-            unbindService(mConnection);
-            mIsBind = false;
-        }
     }
 }
