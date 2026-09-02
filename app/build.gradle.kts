@@ -5,26 +5,28 @@ plugins {
 }
 
 android {
+    // 1. Khai báo biến kiểm tra file keystore
+    val keystorePath = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
+    val hasCustomKey = keystorePath.exists()
+
     signingConfigs {
-    getByName("debug") {
-        val keystoreFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
-        if (keystoreFile.exists()) {
-            storeFile = keystoreFile
-            storePassword = "hayk2010"
-            keyPassword = "hayk2010"
-            keyAlias = "key0"
+        getByName("debug") {
+            if (hasCustomKey) {
+                storeFile = keystorePath
+                storePassword = "hayk2010"
+                keyPassword = "hayk2010"
+                keyAlias = "key0"
+            }
+        }
+        create("release") {
+            if (hasCustomKey) {
+                storeFile = keystorePath
+                keyAlias = "key0"
+                storePassword = "hayk2010"
+                keyPassword = "hayk2010"
+            }
         }
     }
-    create("release") {
-        val keystoreFile = file("C:\\sc-karn\\fff\\keystore_playmarket2.jks")
-        if (keystoreFile.exists()) {
-            storeFile = keystoreFile
-            keyAlias = "key0"
-            storePassword = "hayk2010"
-            keyPassword = "hayk2010"
-        }
-    }
-}
 
     namespace = "com.rstarx.hexrays"
     compileSdk = 34
@@ -55,7 +57,9 @@ android {
             isDebuggable = true
             isJniDebuggable = true
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("release")
+            
+            // 2. Chỗ này rất quan trọng: Tự động đổi config dựa trên việc có file hay không
+            signingConfig = if (hasCustomKey) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
 
             externalNativeBuild {
                 cmake {
@@ -73,7 +77,9 @@ android {
             isDebuggable = false
             isJniDebuggable = false
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("release")
+            
+            // 2. Tương tự cho release
+            signingConfig = if (hasCustomKey) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
 
             externalNativeBuild {
                 cmake {
