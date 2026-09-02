@@ -29,7 +29,9 @@ public class SplashActivity extends AppCompatActivity {
     private static final int ALL_FILES_REQUEST_CODE = 2222;
     private static final int BASIC_PERMISSION_CODE = 1111;
 
-    // สิทธิ์ไมโครโฟน (พื้นที่จัดเก็บจะใช้ MANAGE_EXTERNAL_STORAGE แยกต่างหากสำหรับ Android 11+)
+    // BẬT/TẮT MODE TEST: Đặt true để bỏ qua hoàn toàn Service API và vào thẳng MainActivity test
+    private static final boolean BYPASS_API_FOR_TESTING = true;
+
     private final String[] basicPermissions = {
             "android.permission.RECORD_AUDIO"
     };
@@ -50,11 +52,15 @@ public class SplashActivity extends AppCompatActivity {
         Config.currentContext = this;
         mMessenger = new Messenger(new IncomingHandler(Looper.getMainLooper()));
 
-        // 2. ตรวจสอบเน็ตและ GPU
         if (Util.isNetworkConnected(this)) {
             detectGpuAndStart();
         } else {
-            showSimpleDialog("ไม่มีอินเทอร์เน็ต", "กรุณาเชื่อมต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล", true);
+            // Nếu bật Bypass thì không cần bắt buộc có mạng
+            if (BYPASS_API_FOR_TESTING) {
+                detectGpuAndStart();
+            } else {
+                showSimpleDialog("ไม่มีอินเทอร์เน็ต", "กรุณาเชื่อมต่ออินเทอร์เน็ตเพื่อโหลดข้อมูล", true);
+            }
         }
     }
 
@@ -70,7 +76,6 @@ public class SplashActivity extends AppCompatActivity {
 
                 Log.d(TAG, "GPU Type: " + mGpuType);
 
-                // เริ่มขั้นตอนการเช็คสิทธิ์บน UI Thread
                 runOnUiThread(() -> startPermissionSequence());
             }
             @Override public void onSurfaceChanged(GL10 gl, int w, int h) {}
@@ -87,14 +92,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startPermissionSequence() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // สำหรับ Samsung Android 11, 12, 13, 14
             if (Environment.isExternalStorageManager()) {
                 checkBasicPermissions();
             } else {
                 showAllFilesDialog();
             }
         } else {
-            // สำหรับ Android รุ่นเก่า
             checkBasicPermissions();
         }
     }
@@ -122,6 +125,17 @@ public class SplashActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO") != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, basicPermissions, BASIC_PERMISSION_CODE);
         } else {
+            proceedToNextStep();
+        }
+    }
+
+    private void proceedToNextStep() {
+        // NẾU BẬT MODE TEST -> VÀO THẲNG MAINACTIVITY, KHÔNG CHẠY UPDATESERVICE
+        if (BYPASS_API_FOR_TESTING) {
+            Toast.makeText(this, "Chế độ Test Offline: Đang vào MainActivity...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        } else {
             startUpdateService();
         }
     }
@@ -130,7 +144,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ALL_FILES_REQUEST_CODE) {
-            // แก้ปัญหา Samsung อัปเดตสิทธิ์ช้า: หน่วงเวลา 1 วินาทีก่อนเช็คสถานะใหม่
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     if (Environment.isExternalStorageManager()) {
@@ -138,7 +151,7 @@ public class SplashActivity extends AppCompatActivity {
                         checkBasicPermissions();
                     } else {
                         Toast.makeText(this, "คุณยังไม่ได้อนุญาตสิทธิ์ไฟล์!", Toast.LENGTH_LONG).show();
-                        showAllFilesDialog(); // ถามซ้ำจนกว่าจะยอมเปิด
+                        showAllFilesDialog();
                     }
                 }
             }, 1000);
@@ -149,8 +162,7 @@ public class SplashActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == BASIC_PERMISSION_CODE) {
-            // ไม่ว่าจะอนุญาตไมค์หรือไม่ ให้ไปหน้าโหลดต่อเพื่อให้เกมรันได้
-            startUpdateService();
+            proceedToNextStep();
         }
     }
 
@@ -191,26 +203,15 @@ public class SplashActivity extends AppCompatActivity {
                 .setPositiveButton("ตกลง", (d, id) -> { if(exit) finish(); }).show();
     }
 
-    // ĐÃ SỬA LẠI LOGIC CHỖ NÀY ĐỂ BẮT LỖI API VÀ BYPASS
     public class IncomingHandler extends Handler {
         public IncomingHandler(Looper looper) { super(looper); }
         @Override
         public void handleMessage(@NonNull Message msg) {
             if (msg.what == 5) {
                 String status = msg.getData().getString("status", "");
-                
                 if ("UpdateRequired".equals(status)) {
-                    // Trạng thái 1: Kết nối API thành công và CẦN update -> Mở trang tải Data
                     startActivity(new Intent(SplashActivity.this, UpdateActivity.class));
-                } 
-                else if ("Updated".equals(status)) {
-                    // Trạng thái 2: Kết nối API thành công và KHÔNG CẦN update -> Vào thẳng game
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                } 
-                else {
-                    // Trạng thái 3: Không kết nối được API (Timeout / Lỗi / Status trả về rỗng) 
-                    // -> Báo một thông báo nhỏ rồi tự động bypass vào thẳng game để Test Offline
-                    Toast.makeText(SplashActivity.this, "Không kết nối được API Server. Đang vào chế độ Test Offline!", Toast.LENGTH_LONG).show();
+                } else {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
                 finish();
