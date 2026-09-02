@@ -1783,7 +1783,6 @@ void ScrApplyActorAnimation(RPCParameters* rpcParams)
 		pActor->ApplyAnimation(szAnimName, szAnimLib, fDelta, bLoop, bLockX, bLockY, bFreeze, iTime);
 	}
 }
-
 void ScrClearActorAnimation(RPCParameters* rpcParams)
 {
 	unsigned char* Data = reinterpret_cast<unsigned char*>(rpcParams->input);
