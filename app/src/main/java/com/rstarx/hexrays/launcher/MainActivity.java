@@ -19,7 +19,6 @@ import com.rstarx.hexrays.R;
 import com.rstarx.hexrays.game.SAMP;
 import com.rstarx.hexrays.launcher.util.ConfigValidator;
 import com.rstarx.hexrays.launcher.util.SAMPServerInfo;
-import com.rstarx.hexrays.launcher.util.SignatureChecker;
 
 import org.ini4j.Wini;
 import org.json.JSONObject;
@@ -55,10 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(!SignatureChecker.isSignatureValid(this, getPackageName())) {
-            finish();
-            return;
-        }
+        // Đã xóa phần SignatureChecker gây đóng app lập tức
 
         clearModelCache();
 
