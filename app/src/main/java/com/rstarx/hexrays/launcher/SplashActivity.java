@@ -47,12 +47,6 @@ public class SplashActivity extends AppCompatActivity {
 
         statusText = findViewById(R.id.br_ls_progress2);
 
-        // 1. ตรวจสอบ Signature (ถ้าไม่ผ่านจะปิดแอป)
-        if(!SignatureChecker.isSignatureValid(this, getPackageName())) {
-            showSimpleDialog("แจ้งเตือน", "Launcher ไม่ถูกต้อง กรุณาใช้ของแท้", true);
-            return;
-        }
-
         Config.currentContext = this;
         mMessenger = new Messenger(new IncomingHandler(Looper.getMainLooper()));
 
