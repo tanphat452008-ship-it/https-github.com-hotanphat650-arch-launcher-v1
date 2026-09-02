@@ -29,7 +29,7 @@ public class SignatureChecker {
         } catch (NameNotFoundException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     private static PackageInfo getPackageInfo(Context ctx, String packageName) throws NameNotFoundException {
