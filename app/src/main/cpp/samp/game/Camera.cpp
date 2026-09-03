@@ -44,14 +44,11 @@ void CCamera::SetBehindPlayer()
     ScriptCommand(&restore_camera_jumpcut);
 }
 
-
 void CCamera::SetPosition(float fX, float fY, float fZ, float fRotationX, float fRotationY, float fRotationZ)
 {
     ScriptCommand(&restore_camera_to_user);
     ScriptCommand(&set_camera_position, fX, fY, fZ, fRotationX, fRotationY, fRotationZ);
 }
-
-
 
 void CCamera::LookAtPoint(float fX, float fY, float fZ, int iType)
 {
@@ -59,20 +56,18 @@ void CCamera::LookAtPoint(float fX, float fY, float fZ, int iType)
     ScriptCommand(&point_camera, fX, fY, fZ, iType);
 }
 
-
 void CCamera::InterpolateCameraPos(CVector *posFrom, CVector *posTo, int time, uint8_t mode)
 {
     CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
 
     ScriptCommand(&restore_camera_to_user);
-    ScriptCommand(&lock_camera_position1, 1);
+    // Đã sửa lock_camera_position1 -> lock_camera_position
+    ScriptCommand(&lock_camera_position, 1); 
     ScriptCommand(&set_camera_pos_time_smooth, posFrom->x, posFrom->y, posFrom->z, posTo->x, posTo->y, posTo->z, time, mode);
 }
-
 
 void CCamera::InterpolateCameraLookAt(CVector *posFrom, CVector *posTo, int time, uint8_t mode)
 {
     ScriptCommand(&lock_camera_position, 1);
     ScriptCommand(&point_camera_transverse, posFrom->x, posFrom->y, posFrom->z, posTo->x, posTo->y, posTo->z, time, mode);
 }
-
