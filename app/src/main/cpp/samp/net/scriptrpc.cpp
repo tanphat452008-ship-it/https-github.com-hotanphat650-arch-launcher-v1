@@ -1705,40 +1705,68 @@ int GetInternalBoneIDFromSampID(int sampid)
 void ScrSetPlayerAttachedObject(RPCParameters* rpcParams)
 {
     FLog("ScrSetPlayerAttachedObject");
+    
+    if (!rpcParams || !rpcParams->input) return;
+
     unsigned char* Data = reinterpret_cast<unsigned char*>(rpcParams->input);
     int iBitLength = rpcParams->numberOfBitsOfData;
-    RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
+    
+    // Khởi tạo BitStream đúng chuẩn độ dài Bit
+    RakNet::BitStream bsData(Data, BITS_TO_BYTES(iBitLength), false);
 
     PLAYERID id;
     uint32_t slot;
-    bool create;
+    uint32_t create; // Đọc dạng integer/byte để tránh lệch BitStream
     ATTACHED_OBJECT_INFO info;
 
     bsData.Read(id);
     bsData.Read(slot);
     bsData.Read(create);
+
+    // Tìm Player Ped tương ứng
     CPlayerPed* pPed = nullptr;
-    if (id == pNetGame->GetPlayerPool()->GetLocalPlayerID())
+    if (pNetGame && pNetGame->GetPlayerPool())
     {
-        pPed = pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed();
-    }
-    else
-    {
-        if (pNetGame->GetPlayerPool()->GetAt(id))
+        if (id == pNetGame->GetPlayerPool()->GetLocalPlayerID())
         {
-            pPed = pNetGame->GetPlayerPool()->GetAt(id)->GetPlayerPed();
+            if (pNetGame->GetPlayerPool()->GetLocalPlayer())
+                pPed = pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed();
+        }
+        else
+        {
+            if (pNetGame->GetPlayerPool()->GetAt(id))
+                pPed = pNetGame->GetPlayerPool()->GetAt(id)->GetPlayerPed();
         }
     }
+
     if (!pPed) return;
+
+    // Nếu create == 0 -> Gỡ Object khỏi slot
     if (!create)
     {
         pPed->DeattachObject(slot);
         return;
     }
-    bsData.Read((char*)& info, sizeof(ATTACHED_OBJECT_INFO));
 
+    // Đọc chi tiết dữ liệu Attached Object
+    bsData.Read(info.iModel);
+    bsData.Read(info.iBoneID);
+    bsData.Read(info.vecOffset.X);
+    bsData.Read(info.vecOffset.Y);
+    bsData.Read(info.vecOffset.Z);
+    bsData.Read(info.vecRot.X);
+    bsData.Read(info.vecRot.Y);
+    bsData.Read(info.vecRot.Z);
+    bsData.Read(info.vecScale.X);
+    bsData.Read(info.vecScale.Y);
+    bsData.Read(info.vecScale.Z);
+    bsData.Read(info.dwMaterialColor1);
+    bsData.Read(info.dwMaterialColor2);
+
+    // Tiến hành Gắn Object vào Player
     pPed->AttachObject(&info, slot);
 }
+
 
 void ScrApplyActorAnimation(RPCParameters* rpcParams)
 {
