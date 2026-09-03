@@ -4,6 +4,16 @@
 #include "object.h"
 #include "game/Entity/CPedGTA.h"
 #include "aimstuff.h"
+#pragma pack(push, 1)
+typedef struct _NEW_ATTACHED_OBJECT {
+	int iModel;
+	int iBoneID;
+	sa::CVector vecOffset;
+	sa::CVector vecRot;
+	sa::CVector vecScale;
+	uint32_t dwMaterialColor1;
+	uint32_t dwMaterialColor2;
+} NEW_ATTACHED_OBJECT;
 
 enum eStuffType {
 	STUFF_TYPE_NONE,
