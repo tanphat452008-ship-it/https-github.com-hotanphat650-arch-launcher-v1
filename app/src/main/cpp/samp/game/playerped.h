@@ -8,9 +8,9 @@
 typedef struct _NEW_ATTACHED_OBJECT {
 	int iModel;
 	int iBoneID;
-	sa::CVector vecOffset;
-	sa::CVector vecRot;
-	sa::CVector vecScale;
+	CVector vecOffset;
+	CVector vecRot;
+	CVector vecScale;
 	uint32_t dwMaterialColor1;
 	uint32_t dwMaterialColor2;
 } NEW_ATTACHED_OBJECT;
