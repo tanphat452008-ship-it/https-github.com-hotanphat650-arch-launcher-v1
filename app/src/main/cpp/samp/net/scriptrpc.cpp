@@ -1704,67 +1704,45 @@ int GetInternalBoneIDFromSampID(int sampid)
 
 void ScrSetPlayerAttachedObject(RPCParameters* rpcParams)
 {
-    FLog("ScrSetPlayerAttachedObject");
-    
-    if (!rpcParams || !rpcParams->input) return;
+	spdlog::info("ScriptRPC: ScrSetPlayerAttachedObject");
+	auto Data = reinterpret_cast<unsigned char*>(rpcParams->input);
+	int iBitLength = rpcParams->numberOfBitsOfData;
 
-    unsigned char* Data = reinterpret_cast<unsigned char*>(rpcParams->input);
-    int iBitLength = rpcParams->numberOfBitsOfData;
-    
-    // Khởi tạo BitStream đúng chuẩn độ dài Bit
-    RakNet::BitStream bsData(Data, BITS_TO_BYTES(iBitLength), false);
+	NEW_ATTACHED_OBJECT NewAttachedObject;
+	memset(&NewAttachedObject, 0, sizeof(NEW_ATTACHED_OBJECT));
 
-    PLAYERID id;
-    uint32_t slot;
-    uint32_t create; // Đọc dạng integer/byte để tránh lệch BitStream
-    ATTACHED_OBJECT_INFO info;
+	PLAYERID PlayerID;
+	int index;
+	bool bCreate;
+	RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
+	bsData.Read(PlayerID);
+	bsData.Read(index);
+	bsData.Read(bCreate);
 
-    bsData.Read(id);
-    bsData.Read(slot);
-    bsData.Read(create);
+	CPlayerPool* pPlayerPool = pNetGame->GetPlayerPool();
+	if (pPlayerPool) {
+		CPlayerPed* pPlayerPed = nullptr;
 
-    // Tìm Player Ped tương ứng
-    CPlayerPed* pPed = nullptr;
-    if (pNetGame && pNetGame->GetPlayerPool())
-    {
-        if (id == pNetGame->GetPlayerPool()->GetLocalPlayerID())
-        {
-            if (pNetGame->GetPlayerPool()->GetLocalPlayer())
-                pPed = pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed();
-        }
-        else
-        {
-            if (pNetGame->GetPlayerPool()->GetAt(id))
-                pPed = pNetGame->GetPlayerPool()->GetAt(id)->GetPlayerPed();
-        }
-    }
+		if (pPlayerPool->GetLocalPlayerID() == PlayerID) {
+			pPlayerPed = pPlayerPool->GetLocalPlayer()->GetPlayerPed();
+		}
+		else {
+			CRemotePlayer* pRemotePlayer = pPlayerPool->GetAt(PlayerID);
+			if (pRemotePlayer) {
+				pPlayerPed = pRemotePlayer->GetPlayerPed();
+			}
+		}
 
-    if (!pPed) return;
-
-    // Nếu create == 0 -> Gỡ Object khỏi slot
-    if (!create)
-    {
-        pPed->DeattachObject(slot);
-        return;
-    }
-
-    // Đọc chi tiết dữ liệu Attached Object
-    bsData.Read(info.iModel);
-    bsData.Read(info.iBoneID);
-    bsData.Read(info.vecOffset.X);
-    bsData.Read(info.vecOffset.Y);
-    bsData.Read(info.vecOffset.Z);
-    bsData.Read(info.vecRot.X);
-    bsData.Read(info.vecRot.Y);
-    bsData.Read(info.vecRot.Z);
-    bsData.Read(info.vecScale.X);
-    bsData.Read(info.vecScale.Y);
-    bsData.Read(info.vecScale.Z);
-    bsData.Read(info.dwMaterialColor1);
-    bsData.Read(info.dwMaterialColor2);
-
-    // Tiến hành Gắn Object vào Player
-    pPed->AttachObject(&info, slot);
+		if (pPlayerPed) {
+			if (bCreate) {
+				bsData.Read((char*) &NewAttachedObject, sizeof(NEW_ATTACHED_OBJECT));
+				pPlayerPed->SetAttachedObject(index, &NewAttachedObject);
+			}
+			else {
+				pPlayerPed->RemoveAttachedObject(index);
+			}
+		}
+	}
 }
 
 
