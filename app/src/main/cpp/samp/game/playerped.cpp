@@ -2355,13 +2355,85 @@ void CPlayerPed::AttachObject(ATTACHED_OBJECT_INFO* pInfo, int iSlot)
     attach.pObject->m_pEntity->m_bUsesCollision = false;
 }
 
-void CPlayerPed::SetAttachOffset(int iSlot, CVector pos, CVector rot)
+void CPlayerPed::SetAttachedObject(int index, NEW_ATTACHED_OBJECT* pNewAttachedObject)
 {
-    auto attach = GetAttachedObject(iSlot);
-    if(attach) {
-        attach->vecOffset = pos;
-        attach->vecRotation = rot;
-    }
+	if (m_ped && !IsEntityPlaceable(m_ped)) {
+		if (m_ped->m_pRwObject) {
+			if (index >= 0 && index < 10) {
+				int iBoneID = pNewAttachedObject->iBoneID;
+				if (iBoneID > 0 && iBoneID <= 18) {
+					if (GetObjectSlotState(index)) {
+						RemoveAttachedObject(index);
+					}
+
+					memcpy(&m_attachedObjects[index].info, pNewAttachedObject, sizeof(NEW_ATTACHED_OBJECT));
+
+					RwMatrix matPlayer = m_ped->GetMatrix().ToRwMatrix();
+					auto pNewObject = new CObject(pNewAttachedObject->iModel, {matPlayer.pos.x, matPlayer.pos.y, matPlayer.pos.z}, pNewAttachedObject->vecRot, 200.0f, true);
+
+					m_attachedObjects[index].object = pNewObject;
+					m_attachedObjects[index].slotUsed = true;
+
+					if (pNewAttachedObject->dwMaterialColor1) {
+						pNewObject->SetMaterial(-1, 0, nullptr, nullptr, pNewAttachedObject->dwMaterialColor1);
+					}
+					if (pNewAttachedObject->dwMaterialColor2) {
+						pNewObject->SetMaterial(-1, 1, nullptr, nullptr, pNewAttachedObject->dwMaterialColor2);
+					}
+
+					pNewObject->SetCollisionChecking(false);
+				}
+			}
+		}
+	}
+}
+
+void CPlayerPed::RemoveAttachedObject(int index)
+{
+	if (GetObjectSlotState(index)) {
+		if (m_attachedObjects[index].object) {
+			delete m_attachedObjects[index].object;
+			m_attachedObjects[index].object = nullptr;
+		}
+
+		memset(&m_attachedObjects[index].info, 0, sizeof(NEW_ATTACHED_OBJECT));
+		m_attachedObjects[index].slotUsed = false;
+	}
+}
+
+bool CPlayerPed::GetObjectSlotState(int index)
+{
+	if (index < 0 || index >= 10) {
+		return false;
+	}
+
+	return m_attachedObjects[index].slotUsed;
+}
+
+bool CPlayerPed::HasAttachedObject()
+{
+	for (auto& m_attachedObject : m_attachedObjects) {
+		if (m_attachedObject.slotUsed) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void CPlayerPed::RemoveAllAttachedObjects()
+{
+	for (auto& m_attachedObject : m_attachedObjects) {
+		if (m_attachedObject.slotUsed) {
+			if (m_attachedObject.object) {
+				delete m_attachedObject.object;
+				m_attachedObject.object = nullptr;
+			}
+
+			memset(&m_attachedObject.info, 0, sizeof(NEW_ATTACHED_OBJECT));
+			m_attachedObject.slotUsed = false;
+		}
+	}
 }
 
 void CPlayerPed::DeattachObject(int iSlot)
