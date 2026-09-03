@@ -19,6 +19,7 @@ enum ePlayerState : uint8 {
     PLAYERSTATE_LEFT_GAME
 };
 
+#pragma pack(push, 4)
 struct CPlayerInfoGta {
     CPlayerPedGta   *m_pPed;
     CPlayerPedData  PlayerPedData;
@@ -33,7 +34,13 @@ struct CPlayerInfoGta {
     uint32          vehicle_time_counter;
     bool            bTaxiTimerScore;
     bool            m_bTryingToExitCar;
+    
+#if defined(__x86_64__) || defined(__aarch64__)
+    uint8           pad0[6]; // Alignment padding for 64-bit pointer
+#else
     uint8           pad0[2];
+#endif
+
     CVehicleGTA     *pLastTargetVehicle;
     ePlayerState    PlayerState;
 
@@ -78,13 +85,28 @@ struct CPlayerInfoGta {
     uint8 m_nBustedAudioStatus;
     int16 m_nLastBustMessageNumber;
 
+#if defined(__x86_64__) || defined(__aarch64__)
+    uint8 pad1[2]; // Align CrossHair
+#endif
+
     uint8 CrossHair[0xC];
 
     bool bGetOject;
     char m_skinName[32];
+
+#if defined(__x86_64__) || defined(__aarch64__)
+    uint8 pad2[7]; // Align m_pSkinTexture pointer
+#endif
+
     RwTexture *m_pSkinTexture;
     bool m_bParachuteReferenced;
+    
+#if defined(__x86_64__) || defined(__aarch64__)
+    uint8 pad3[3]; // Align m_nRequireParachuteTimer
+#endif
+
     uint32 m_nRequireParachuteTimer;
 };
-VALIDATE_SIZE(CPlayerInfoGta, (VER_x32 ? 0x194 : 0x1D8));
+#pragma pack(pop)
 
+VALIDATE_SIZE(CPlayerInfoGta, (VER_x32 ? 0x194 : 0x1D8));
