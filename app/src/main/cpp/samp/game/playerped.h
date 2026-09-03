@@ -219,8 +219,11 @@ public:
 	void SetCurrentWeapon(uint8_t weaponType);
 
     void AttachObject(ATTACHED_OBJECT_INFO* pInfo, int iSlot);
-    void SetAttachOffset(int iSlot, CVector pos, CVector rot);
-    void DeattachObject(int iSlot);
+    void SetAttachedObject(int index, NEW_ATTACHED_OBJECT* pNewAttachedObject);
+	void RemoveAttachedObject(int index);
+	bool GetObjectSlotState(int index);
+	bool HasAttachedObject();
+	void RemoveAllAttachedObjects();
     bool IsHasAttach();
     void FlushAttach();
     void ProcessAttach();
